@@ -3,6 +3,7 @@
 import json
 import re
 from datetime import datetime, timezone
+from io import BytesIO
 from threading import Lock
 from time import monotonic, sleep
 from urllib.error import HTTPError, URLError
@@ -54,6 +55,17 @@ def post_json(url, headers, payload, timeout):
             if exc.code in {500, 502, 503, 504} and attempt < 3:
                 sleep(1.0 * (2**attempt))
                 continue
+            if exc.code == 400 and attempt < 3:
+                # Groq JSON mode answers 400 when the model's own JSON was malformed. That
+                # is sampling noise, so the same request is retried rather than failing.
+                try:
+                    raw_error = exc.read(8192)
+                except OSError:
+                    raw_error = b""
+                if b"json_validate_failed" in raw_error or b"Failed to generate JSON" in raw_error:
+                    sleep(0.5)
+                    continue
+                exc.fp = BytesIO(raw_error)
             last_error = exc
             break
         except (URLError, TimeoutError, OSError):
@@ -192,6 +204,7 @@ class ModelGateway:
             output_tokens = max(output_tokens, 2048)
         schema_json = schema.model_json_schema()
         # A single schema/semantic repair per task, counted against the same ledger.
+        hint = ""
         for attempt in range(2):
             system = (
                 prompt
@@ -200,6 +213,8 @@ class ModelGateway:
             )
             if attempt:
                 system += "\nPrevious output failed validation. Recreate from the supplied data, using only allowed IDs and evidence. Do not add fields."
+                if hint:
+                    system += " Problem: " + hint
             user = json.dumps(data, ensure_ascii=False, separators=(",", ":"))
             # UTF-8 byte count + framing is a conservative input-token reservation.
             input_bound = len((system + user).encode()) + 512
@@ -288,13 +303,16 @@ class ModelGateway:
                     }
                     for error in exc.errors(include_input=False, include_context=False)[:8]
                 ]
+                hint = "; ".join(f"{e['location']} {e['type']}" for e in safe_errors)[:300]
                 with self.lock:
                     self.validation_failures.append(
                         {"role": role, "kind": "schema", "errors": safe_errors}
                     )
                 if attempt:
                     raise ModelFailure("invalid_model_output") from None
-            except ValueError:
+            except ValueError as exc:
+                # Validator messages are fixed strings that never echo model output.
+                hint = re.sub(r"[^A-Za-z0-9 ,.:_-]", "", str(exc))[:160]
                 with self.lock:
                     self.validation_failures.append({"role": role, "kind": "semantic"})
                 if attempt:

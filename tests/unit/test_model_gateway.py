@@ -256,3 +256,72 @@ def test_overlong_summary_is_clipped_but_other_fields_stay_strict():
     assert clip_summary(short, schema) == short
     assert clip_summary("not json", schema) == "not json"
     assert clip_summary(short, {"properties": {}}) == short
+
+
+def test_repair_prompt_names_the_validation_problem_without_echoing_output():
+    calls = []
+    bad = json.dumps({"selected_ids": "oops", "evidence_ids": [], "summary": "private-bad-output"})
+
+    def transport(url, headers, payload, timeout):
+        calls.append(payload)
+        return response(bad if len(calls) == 1 else GOOD)
+
+    client = gateway(transport)
+    assert client.generate("destination", "Return JSON", {}, Selection).selected_ids == []
+    repair_system = calls[1]["messages"][0]["content"]
+    assert "Problem: selected_ids list_type" in repair_system
+    assert "private-bad-output" not in json.dumps(calls[1])
+
+
+def test_semantic_repair_prompt_carries_the_fixed_validator_message():
+    calls = []
+
+    def transport(url, headers, payload, timeout):
+        calls.append(payload)
+        return response(GOOD)
+
+    def validate(output):
+        if len(calls) == 1:
+            raise ValueError("Select supported candidates")
+        return output
+
+    client = gateway(transport)
+    client.generate("planner", "Return JSON", {}, Selection, validate=validate)
+    assert "Problem: Select supported candidates" in calls[1]["messages"][0]["content"]
+
+
+def test_groq_malformed_json_400_is_retried_but_other_400s_are_not(monkeypatch):
+    from io import BytesIO
+
+    class Response:
+        def read(self, limit):
+            return json.dumps({"ok": True}).encode()
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *args):
+            return False
+
+    def make(body_for_first):
+        class Opener:
+            calls = 0
+
+            def open(self, *args, **kwargs):
+                self.calls += 1
+                if self.calls == 1:
+                    raise HTTPError("safe", 400, "bad", {}, BytesIO(body_for_first))
+                return Response()
+
+        return Opener()
+
+    monkeypatch.setattr("dubai_planner.services.llm_gateway.sleep", lambda delay: None)
+    url = "https://api.groq.com/openai/v1/chat/completions"
+    retry = make(b'{"error":{"code":"json_validate_failed","message":"Failed to generate JSON"}}')
+    monkeypatch.setattr("dubai_planner.services.llm_gateway.build_opener", lambda *args: retry)
+    assert post_json(url, {}, {}, 1) == {"ok": True} and retry.calls == 2
+    other = make(b'{"error":{"code":"invalid_request","message":"bad field"}}')
+    monkeypatch.setattr("dubai_planner.services.llm_gateway.build_opener", lambda *args: other)
+    with pytest.raises(ModelFailure) as caught:
+        post_json(url, {}, {}, 1)
+    assert caught.value.code == "invalid_provider_request" and other.calls == 1

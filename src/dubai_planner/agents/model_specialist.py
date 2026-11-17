@@ -132,15 +132,15 @@ class ModelSpecialist:
             )
 
             def validate(output):
-                if output.clarification_fields != required:
-                    raise ValueError("Clarifications differ from required fields")
-                if output.selected_ids or output.evidence_ids:
-                    raise ValueError("Selection cannot precede research")
+                # Python owns both authoritative fields (see the return below): the
+                # clarification list is the computed one and nothing is selected before
+                # research. Only the schema and the model's summary are taken from the
+                # reply, so a differently-worded echo must not fail the whole run.
                 return output
 
             output = ask(Orchestration, validate)
             return OrchestratorOutput(
-                request=request, clarification_fields=required, selected_ids=output.selected_ids
+                request=request, clarification_fields=required, selected_ids=[]
             )
         if self.role == "planner":
             data["candidates"] = [compact(p) for p in context.candidates]
