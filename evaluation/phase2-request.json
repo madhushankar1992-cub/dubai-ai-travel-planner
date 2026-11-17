@@ -1,0 +1,28 @@
+{
+  "id": "phase2-dated-cultural-trip",
+  "days": 4,
+  "arrival": "2026-11-20",
+  "departure": "2026-11-23",
+  "check_in": "2026-11-20",
+  "check_out": "2026-11-23",
+  "nights": 3,
+  "travelers": {"adults": 1, "child_age_bands": []},
+  "rooms": 1,
+  "budget": "5000",
+  "budget_scope": "total_trip",
+  "interests": ["culture", "food", "beach"],
+  "transport_preferences": ["taxi"],
+  "candidate_ids": ["dubai-frame", "shindagha", "dubai-mall", "al-seef"],
+  "price_choices": {"dubai-frame": "allowance-dubai-frame", "shindagha": "allowance-shindagha"},
+  "meal_allowance_price_id": "price-meal-allowance",
+  "accept_planning_estimates": true,
+  "exclusions": ["flights"],
+  "assumptions": [
+    "Demonstration dates and party, not the user's travel booking.",
+    "Hotel rate snapshot checked 15 November 2026; refresh before booking. No availability reserved.",
+    "Local area-centroid routing; the exact hotel pickup and venue entrances need reconfirmation.",
+    "Accept explicit planning allowances: meals AED 30-80 each; adult tickets published base to base*1.05+10; taxi allowance ceil(km*2.5+15) to ceil(km*4+35) per traveler per journey. These include provisional fee reserves, not guaranteed supplier maxima.",
+    "Accept published recurring hours projected onto these four dates; reconfirm closures and ticket availability. No beach visit is scheduled in this compact cultural example.",
+    "Trip starts and ends at the Marina base; airport transfers, flights, shopping, visas and personal incidentals are outside this example."
+  ]
+}

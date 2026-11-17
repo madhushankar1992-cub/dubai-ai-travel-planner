@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "dataset_version": "2026-11-15.2",
+  "evidence_clock": "2026-11-15T18:00:00Z",
+  "default_repetitions": 5,
+  "baseline_request": "phase2-request.json",
+  "scenarios": [
+    {"id": "four-day-normal", "expected": ["validated_estimate"]},
+    {"id": "one-day", "expected": ["partial", "validated_estimate"]},
+    {"id": "seven-day", "expected": ["partial", "validated_estimate"]},
+    {"id": "adult-and-child", "expected": ["partial", "validated_estimate"]},
+    {"id": "ambiguous-budget", "expected": ["needs_input"]},
+    {"id": "low-cap", "expected": ["partial", "infeasible"]},
+    {"id": "expired-or-unknown-fee", "expected": ["partial"]},
+    {"id": "unsupported-accessibility", "expected": ["partial"]},
+    {"id": "duplicate-repair", "expected": ["validated_estimate"]},
+    {"id": "no-progress", "expected": ["partial"]},
+    {"id": "cancelled", "expected": ["cancelled"]},
+    {"id": "local-only-fallback", "expected": ["validated_estimate"]}
+  ]
+}

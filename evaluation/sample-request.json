@@ -1,0 +1,12 @@
+{
+  "id": "four-day-cultural-trip",
+  "days": 4,
+  "nights": 3,
+  "travelers": {"adults": 1, "child_age_bands": []},
+  "rooms": 1,
+  "budget": "5000",
+  "budget_scope": "total_trip",
+  "interests": ["culture", "food", "beach"],
+  "exclusions": ["flights"],
+  "assumptions": ["Example only: one adult, three confirmed hotel nights, dates unspecified."]
+}

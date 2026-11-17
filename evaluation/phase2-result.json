@@ -1,0 +1,139 @@
+{
+  "dataset_version": "2026-11-15.2",
+  "as_of": "2026-11-15T18:00:00+00:00",
+  "scope": "Historical reproducibility check of the 15 November snapshot, not current rates or availability.",
+  "assumptions": [
+    "Demonstration dates and party, not the user's travel booking.",
+    "Hotel rate snapshot checked 15 November 2026; refresh before booking. No availability reserved.",
+    "Local area-centroid routing; the exact hotel pickup and venue entrances need reconfirmation.",
+    "Accept explicit planning allowances: meals AED 30-80 each; adult tickets published base to base*1.05+10; taxi allowance ceil(km*2.5+15) to ceil(km*4+35) per traveler per journey. These include provisional fee reserves, not guaranteed supplier maxima.",
+    "Accept published recurring hours projected onto these four dates; reconfirm closures and ticket availability. No beach visit is scheduled in this compact cultural example.",
+    "Trip starts and ends at the Marina base; airport transfers, flights, shopping, visas and personal incidentals are outside this example."
+  ],
+  "alternatives": [
+    {
+      "accommodation_id": "rove-marina-quote-flex",
+      "status": "validated_estimate",
+      "budget": {
+        "known_subtotal": "1557",
+        "estimated_low": "2673",
+        "estimated_high": "3776.00",
+        "missing_required_costs": [],
+        "contingency": "377.6000",
+        "contingency_low": "267.30",
+        "total_low": "2940.30",
+        "total_high": "4153.6000",
+        "cap": "5000",
+        "compliance": "within_estimate",
+        "exclusions": [
+          "flights"
+        ]
+      },
+      "days": [
+        {
+          "day": 1,
+          "activities": [
+            "al-seef"
+          ],
+          "routes": [
+            "day-1-road-area-dubai-marina-al-seef",
+            "day-1-road-al-seef-area-dubai-marina"
+          ]
+        },
+        {
+          "day": 2,
+          "activities": [
+            "dubai-frame"
+          ],
+          "routes": [
+            "day-2-road-area-dubai-marina-dubai-frame",
+            "day-2-road-dubai-frame-area-dubai-marina"
+          ]
+        },
+        {
+          "day": 3,
+          "activities": [
+            "shindagha"
+          ],
+          "routes": [
+            "day-3-road-area-dubai-marina-shindagha",
+            "day-3-road-shindagha-area-dubai-marina"
+          ]
+        },
+        {
+          "day": 4,
+          "activities": [
+            "dubai-mall"
+          ],
+          "routes": [
+            "day-4-road-area-dubai-marina-dubai-mall",
+            "day-4-road-dubai-mall-area-dubai-marina"
+          ]
+        }
+      ],
+      "findings": []
+    },
+    {
+      "accommodation_id": "rove-marina-quote-nonrefund",
+      "status": "validated_estimate",
+      "budget": {
+        "known_subtotal": "1535",
+        "estimated_low": "2651",
+        "estimated_high": "3754.00",
+        "missing_required_costs": [],
+        "contingency": "375.4000",
+        "contingency_low": "265.10",
+        "total_low": "2916.10",
+        "total_high": "4129.4000",
+        "cap": "5000",
+        "compliance": "within_estimate",
+        "exclusions": [
+          "flights"
+        ]
+      },
+      "days": [
+        {
+          "day": 1,
+          "activities": [
+            "al-seef"
+          ],
+          "routes": [
+            "day-1-road-area-dubai-marina-al-seef",
+            "day-1-road-al-seef-area-dubai-marina"
+          ]
+        },
+        {
+          "day": 2,
+          "activities": [
+            "dubai-frame"
+          ],
+          "routes": [
+            "day-2-road-area-dubai-marina-dubai-frame",
+            "day-2-road-dubai-frame-area-dubai-marina"
+          ]
+        },
+        {
+          "day": 3,
+          "activities": [
+            "shindagha"
+          ],
+          "routes": [
+            "day-3-road-area-dubai-marina-shindagha",
+            "day-3-road-shindagha-area-dubai-marina"
+          ]
+        },
+        {
+          "day": 4,
+          "activities": [
+            "dubai-mall"
+          ],
+          "routes": [
+            "day-4-road-area-dubai-marina-dubai-mall",
+            "day-4-road-dubai-mall-area-dubai-marina"
+          ]
+        }
+      ],
+      "findings": []
+    }
+  ]
+}

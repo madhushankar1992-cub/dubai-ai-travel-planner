@@ -1,0 +1,94 @@
+{
+  "verified_at_utc": "2026-11-15T17:07:29.377353+00:00",
+  "scope": "Existing Phases 0-3 only; no Phase 4-7 implementation",
+  "python": "3.12.16",
+  "dependencies": {
+    "pydantic": "2.14.3",
+    "langgraph": "1.2.20",
+    "streamlit": "1.66.1",
+    "pytest": "9.2.0"
+  },
+  "environment_note": "Existing verification environment reused; no fresh install or added dependencies in this audit",
+  "dataset_version": "2026-11-15.2",
+  "counts": {
+    "places": 27,
+    "accommodation": 11,
+    "prices": 60,
+    "routes": 54,
+    "tariffs": 4,
+    "evidence": 34
+  },
+  "checks": {
+    "tests": ".......................................................................  [100%]\n71 passed in 0.72s",
+    "lint": "All checks passed!",
+    "format": "54 files already formatted",
+    "catalog": "Policies pass; repeated import unchanged; active SQLite matches curated JSON",
+    "app": "Undated and dated catalog views passed",
+    "configuration": "Default local-only; external travel data and model runner disabled"
+  },
+  "scenario_as_of_utc": "2026-11-15T18:00:00+00:00",
+  "scenario_scope": "Historical evidence snapshot under explicit opt-in estimates, not live booking availability",
+  "scenarios": [
+    {
+      "accommodation": "flex",
+      "status": "validated_estimate",
+      "budget": {
+        "known_subtotal": "1557",
+        "estimated_low": "2673",
+        "estimated_high": "3776.00",
+        "missing_required_costs": [],
+        "contingency": "377.6000",
+        "contingency_low": "267.30",
+        "total_low": "2940.30",
+        "total_high": "4153.6000",
+        "cap": "5000",
+        "compliance": "within_estimate",
+        "exclusions": [
+          "flights"
+        ]
+      }
+    },
+    {
+      "accommodation": "nonrefund",
+      "status": "validated_estimate",
+      "budget": {
+        "known_subtotal": "1535",
+        "estimated_low": "2651",
+        "estimated_high": "3754.00",
+        "missing_required_costs": [],
+        "contingency": "375.4000",
+        "contingency_low": "265.10",
+        "total_low": "2916.10",
+        "total_high": "4129.4000",
+        "cap": "5000",
+        "compliance": "within_estimate",
+        "exclusions": [
+          "flights"
+        ]
+      }
+    }
+  ],
+  "sources": [
+    "Al Fanar Restaurant & Cafe",
+    "Al Shindagha Museum via Visit Dubai Experiences",
+    "Dubai Culture / Al Shindagha Museum",
+    "Dubai Culture / Dubai Legislation Portal",
+    "Dubai Department of Economy and Tourism",
+    "Dubai Holding / Souk Al Seef",
+    "Dubai Municipality / Dubai Frame",
+    "Emaar / Dubai Mall",
+    "Emaar Properties",
+    "Emirates Dubai Experience",
+    "Fostay live-rate response, Rove Dubai Marina",
+    "Jumeirah Mosque / SMCCU",
+    "OpenStreetMap contributors / OSRM / FOSSGIS",
+    "Project editorial estimates",
+    "Project planning estimates",
+    "Ravi Restaurants",
+    "Roads and Transport Authority",
+    "Rove Hotels",
+    "Sole Mio (Kite Beach operator)",
+    "Souk Al Seef"
+  ],
+  "system_safety": "No BIOS/firmware, PowerShell profile, execution policy or persistent system-setting changes"
+}

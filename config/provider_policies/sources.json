@@ -1,0 +1,605 @@
+[
+  {
+    "id": "rove-offer",
+    "owner": "Rove Hotels",
+    "url": "https://www.rovehotels.com/en/offer/beach-staycation/",
+    "reviewed_on": "2026-11-15",
+    "approved": true,
+    "review_note": "Manually selected factual references and original annotations only; no website text, images, reviews, menus or raw responses copied. Approval covers these authored seed fields, not scraping or a general redistribution licence.",
+    "permitted_use": "Local factual catalog and original editorial estimates; retain attribution and uncertainty.",
+    "attribution": "Rove Hotels",
+    "persistence": true,
+    "export": true,
+    "max_retention_days": null,
+    "allowed_fields": [
+      "evidence",
+      "prices",
+      "accommodation"
+    ]
+  },
+  {
+    "id": "ravi-menu",
+    "owner": "Ravi Restaurants",
+    "url": "https://ravirestaurants.ae/menu/",
+    "reviewed_on": "2026-11-05",
+    "approved": true,
+    "review_note": "Manually selected factual references and original annotations only; no website text, images, reviews, menus or raw responses copied. Approval covers these authored seed fields, not scraping or a general redistribution licence.",
+    "permitted_use": "Local factual catalog and original editorial estimates; retain attribution and uncertainty.",
+    "attribution": "Ravi Restaurants",
+    "persistence": true,
+    "export": true,
+    "max_retention_days": null,
+    "allowed_fields": [
+      "evidence",
+      "prices"
+    ]
+  },
+  {
+    "id": "editorial",
+    "owner": "Project editorial estimates",
+    "url": "docs/data-catalog.md",
+    "reviewed_on": "2026-11-05",
+    "approved": true,
+    "review_note": "Manually selected factual references and original annotations only; no website text, images, reviews, menus or raw responses copied. Approval covers these authored seed fields, not scraping or a general redistribution licence.",
+    "permitted_use": "Local factual catalog and original editorial estimates; retain attribution and uncertainty.",
+    "attribution": "Project editorial estimates",
+    "persistence": true,
+    "export": true,
+    "max_retention_days": null,
+    "allowed_fields": [
+      "evidence",
+      "identity",
+      "coordinates",
+      "visit_duration",
+      "hours",
+      "accessibility",
+      "prices",
+      "routes",
+      "accommodation",
+      "tariffs",
+      "crowd_guidance"
+    ]
+  },
+  {
+    "id": "rta",
+    "owner": "Roads and Transport Authority",
+    "url": "https://rta.ae/wps/portal/rta/ae/public-transport/Nol-Fares",
+    "reviewed_on": "2026-11-05",
+    "approved": true,
+    "review_note": "Manually selected factual references and original annotations only; no website text, images, reviews, menus or raw responses copied. Approval covers these authored seed fields, not scraping or a general redistribution licence.",
+    "permitted_use": "Local factual catalog and original editorial estimates; retain attribution and uncertainty.",
+    "attribution": "Roads and Transport Authority",
+    "persistence": true,
+    "export": true,
+    "max_retention_days": null,
+    "allowed_fields": [
+      "evidence",
+      "prices",
+      "tariffs"
+    ]
+  },
+  {
+    "id": "frame",
+    "owner": "Dubai Municipality / Dubai Frame",
+    "url": "https://www.dubaiframe.ae/en/plan-your-visit",
+    "reviewed_on": "2026-11-15",
+    "approved": true,
+    "review_note": "Manually selected factual references and original annotations only; no website text, images, reviews, menus or raw responses copied. Approval covers these authored seed fields, not scraping or a general redistribution licence.",
+    "permitted_use": "Local factual catalog and original editorial estimates; retain attribution and uncertainty.",
+    "attribution": "Dubai Municipality / Dubai Frame",
+    "persistence": true,
+    "export": true,
+    "max_retention_days": null,
+    "allowed_fields": [
+      "evidence",
+      "identity",
+      "hours",
+      "prices"
+    ]
+  },
+  {
+    "id": "neighborhoods",
+    "owner": "Dubai Department of Economy and Tourism",
+    "url": "https://www.visitdubai.com/en/explore-dubai/dubai-neighbourhoods",
+    "reviewed_on": "2026-11-05",
+    "approved": true,
+    "review_note": "Manually selected factual references and original annotations only; no website text, images, reviews, menus or raw responses copied. Approval covers these authored seed fields, not scraping or a general redistribution licence.",
+    "permitted_use": "Local factual catalog and original editorial estimates; retain attribution and uncertainty.",
+    "attribution": "Dubai Department of Economy and Tourism",
+    "persistence": true,
+    "export": true,
+    "max_retention_days": null,
+    "allowed_fields": [
+      "evidence",
+      "identity",
+      "accommodation"
+    ]
+  },
+  {
+    "id": "culture",
+    "owner": "Dubai Department of Economy and Tourism",
+    "url": "https://www.visitdubai.com/en/articles/dubais-top-11-cultural-locations",
+    "reviewed_on": "2026-11-05",
+    "approved": true,
+    "review_note": "Manually selected factual references and original annotations only; no website text, images, reviews, menus or raw responses copied. Approval covers these authored seed fields, not scraping or a general redistribution licence.",
+    "permitted_use": "Local factual catalog and original editorial estimates; retain attribution and uncertainty.",
+    "attribution": "Dubai Department of Economy and Tourism",
+    "persistence": true,
+    "export": true,
+    "max_retention_days": null,
+    "allowed_fields": [
+      "evidence",
+      "identity",
+      "prices"
+    ]
+  },
+  {
+    "id": "city-guide",
+    "owner": "Dubai Department of Economy and Tourism",
+    "url": "https://www.visitdubai.com/-/media/Images/pdf/2026/dubai-city-guide-en-2026.pdf",
+    "reviewed_on": "2026-11-05",
+    "approved": true,
+    "review_note": "Manually selected factual references and original annotations only; no website text, images, reviews, menus or raw responses copied. Approval covers these authored seed fields, not scraping or a general redistribution licence.",
+    "permitted_use": "Local factual catalog and original editorial estimates; retain attribution and uncertainty.",
+    "attribution": "Dubai Department of Economy and Tourism",
+    "persistence": true,
+    "export": true,
+    "max_retention_days": null,
+    "allowed_fields": [
+      "evidence",
+      "identity"
+    ]
+  },
+  {
+    "id": "alseef",
+    "owner": "Souk Al Seef",
+    "url": "https://soukalseef.ae/en/discover/attractions",
+    "reviewed_on": "2026-11-05",
+    "approved": true,
+    "review_note": "Manually selected factual references and original annotations only; no website text, images, reviews, menus or raw responses copied. Approval covers these authored seed fields, not scraping or a general redistribution licence.",
+    "permitted_use": "Local factual catalog and original editorial estimates; retain attribution and uncertainty.",
+    "attribution": "Souk Al Seef",
+    "persistence": true,
+    "export": true,
+    "max_retention_days": null,
+    "allowed_fields": [
+      "evidence",
+      "identity"
+    ]
+  },
+  {
+    "id": "kite",
+    "owner": "Dubai Department of Economy and Tourism",
+    "url": "https://www.visitdubai.com/en/places-to-visit/kite-beach",
+    "reviewed_on": "2026-11-05",
+    "approved": true,
+    "review_note": "Manually selected factual references and original annotations only; no website text, images, reviews, menus or raw responses copied. Approval covers these authored seed fields, not scraping or a general redistribution licence.",
+    "permitted_use": "Local factual catalog and original editorial estimates; retain attribution and uncertainty.",
+    "attribution": "Dubai Department of Economy and Tourism",
+    "persistence": true,
+    "export": true,
+    "max_retention_days": null,
+    "allowed_fields": [
+      "evidence",
+      "identity"
+    ]
+  },
+  {
+    "id": "beaches",
+    "owner": "Dubai Department of Economy and Tourism",
+    "url": "https://www.visitdubai.com/en/things-to-do/beaches-in-dubai",
+    "reviewed_on": "2026-11-05",
+    "approved": true,
+    "review_note": "Manually selected factual references and original annotations only; no website text, images, reviews, menus or raw responses copied. Approval covers these authored seed fields, not scraping or a general redistribution licence.",
+    "permitted_use": "Local factual catalog and original editorial estimates; retain attribution and uncertainty.",
+    "attribution": "Dubai Department of Economy and Tourism",
+    "persistence": true,
+    "export": true,
+    "max_retention_days": null,
+    "allowed_fields": [
+      "evidence",
+      "identity"
+    ]
+  },
+  {
+    "id": "marina",
+    "owner": "Dubai Department of Economy and Tourism",
+    "url": "https://www.visitdubai.com/en/articles/a-guide-to-dubai-marina",
+    "reviewed_on": "2026-11-05",
+    "approved": true,
+    "review_note": "Manually selected factual references and original annotations only; no website text, images, reviews, menus or raw responses copied. Approval covers these authored seed fields, not scraping or a general redistribution licence.",
+    "permitted_use": "Local factual catalog and original editorial estimates; retain attribution and uncertainty.",
+    "attribution": "Dubai Department of Economy and Tourism",
+    "persistence": true,
+    "export": true,
+    "max_retention_days": null,
+    "allowed_fields": [
+      "evidence",
+      "identity"
+    ]
+  },
+  {
+    "id": "mall",
+    "owner": "Emaar Properties",
+    "url": "https://uae.emaar.com/en/dubai-mall",
+    "reviewed_on": "2026-11-05",
+    "approved": true,
+    "review_note": "Manually selected factual references and original annotations only; no website text, images, reviews, menus or raw responses copied. Approval covers these authored seed fields, not scraping or a general redistribution licence.",
+    "permitted_use": "Local factual catalog and original editorial estimates; retain attribution and uncertainty.",
+    "attribution": "Emaar Properties",
+    "persistence": true,
+    "export": true,
+    "max_retention_days": null,
+    "allowed_fields": [
+      "evidence",
+      "identity"
+    ]
+  },
+  {
+    "id": "tea-house",
+    "owner": "Dubai Department of Economy and Tourism",
+    "url": "https://www.visitdubai.com/en/restaurants/arabian-tea-house",
+    "reviewed_on": "2026-11-05",
+    "approved": true,
+    "review_note": "Manually selected factual references and original annotations only; no website text, images, reviews, menus or raw responses copied. Approval covers these authored seed fields, not scraping or a general redistribution licence.",
+    "permitted_use": "Local factual catalog and original editorial estimates; retain attribution and uncertainty.",
+    "attribution": "Dubai Department of Economy and Tourism",
+    "persistence": true,
+    "export": true,
+    "max_retention_days": null,
+    "allowed_fields": [
+      "evidence",
+      "identity"
+    ]
+  },
+  {
+    "id": "food-tour",
+    "owner": "Dubai Department of Economy and Tourism",
+    "url": "https://www.dubaidet.gov.ae/en/newsroom/press-releases/cultural-food-tours-2026?print=",
+    "reviewed_on": "2026-11-05",
+    "approved": true,
+    "review_note": "Manually selected factual references and original annotations only; no website text, images, reviews, menus or raw responses copied. Approval covers these authored seed fields, not scraping or a general redistribution licence.",
+    "permitted_use": "Local factual catalog and original editorial estimates; retain attribution and uncertainty.",
+    "attribution": "Dubai Department of Economy and Tourism",
+    "persistence": true,
+    "export": true,
+    "max_retention_days": null,
+    "allowed_fields": [
+      "evidence",
+      "identity"
+    ]
+  },
+  {
+    "id": "satwa",
+    "owner": "Dubai Department of Economy and Tourism",
+    "url": "https://www.visitdubai.com/en/explore-dubai/dubai-neighbourhoods/satwa",
+    "reviewed_on": "2026-11-05",
+    "approved": true,
+    "review_note": "Manually selected factual references and original annotations only; no website text, images, reviews, menus or raw responses copied. Approval covers these authored seed fields, not scraping or a general redistribution licence.",
+    "permitted_use": "Local factual catalog and original editorial estimates; retain attribution and uncertainty.",
+    "attribution": "Dubai Department of Economy and Tourism",
+    "persistence": true,
+    "export": true,
+    "max_retention_days": null,
+    "allowed_fields": [
+      "evidence",
+      "identity"
+    ]
+  },
+  {
+    "id": "buqtair",
+    "owner": "Dubai Department of Economy and Tourism",
+    "url": "https://www.visitdubai.com/en/restaurants/bu-qtair",
+    "reviewed_on": "2026-11-05",
+    "approved": true,
+    "review_note": "Manually selected factual references and original annotations only; no website text, images, reviews, menus or raw responses copied. Approval covers these authored seed fields, not scraping or a general redistribution licence.",
+    "permitted_use": "Local factual catalog and original editorial estimates; retain attribution and uncertainty.",
+    "attribution": "Dubai Department of Economy and Tourism",
+    "persistence": true,
+    "export": true,
+    "max_retention_days": null,
+    "allowed_fields": [
+      "evidence",
+      "identity"
+    ]
+  },
+  {
+    "id": "alfanar",
+    "owner": "Souk Al Seef",
+    "url": "https://soukalseef.ae/en/discover/dine/al-fanar-seafood-market",
+    "reviewed_on": "2026-11-05",
+    "approved": true,
+    "review_note": "Manually selected factual references and original annotations only; no website text, images, reviews, menus or raw responses copied. Approval covers these authored seed fields, not scraping or a general redistribution licence.",
+    "permitted_use": "Local factual catalog and original editorial estimates; retain attribution and uncertainty.",
+    "attribution": "Souk Al Seef",
+    "persistence": true,
+    "export": true,
+    "max_retention_days": null,
+    "allowed_fields": [
+      "evidence",
+      "identity"
+    ]
+  },
+  {
+    "id": "alfanar-barsha-menu",
+    "owner": "Al Fanar Restaurant & Cafe",
+    "url": "https://www.alfanarrestaurant.com/menu",
+    "reviewed_on": "2026-11-05",
+    "approved": true,
+    "review_note": "Selected atomic facts and original annotations only; no page bodies, images or general scraping permission.",
+    "permitted_use": "Local manually reviewed factual catalog with attribution.",
+    "attribution": "Al Fanar Restaurant & Cafe",
+    "persistence": true,
+    "export": true,
+    "max_retention_days": null,
+    "allowed_fields": [
+      "evidence",
+      "identity",
+      "prices"
+    ]
+  },
+  {
+    "id": "museum-tariffs",
+    "owner": "Dubai Culture / Dubai Legislation Portal",
+    "url": "https://dlp.dubai.gov.ae/Legislation%20Reference/2024/Administrative%20Resolution%20No.%20%28256%29%20of%202024%20Approving%20Ticket%20Prices%20for%20the%20Etihad%20%26%20Shindagha%20Museum.html",
+    "reviewed_on": "2026-11-05",
+    "approved": true,
+    "review_note": "Selected atomic facts and original annotations only; no page bodies, images or general scraping permission.",
+    "permitted_use": "Local manually reviewed factual catalog with attribution.",
+    "attribution": "Dubai Culture / Dubai Legislation Portal",
+    "persistence": true,
+    "export": true,
+    "max_retention_days": null,
+    "allowed_fields": [
+      "evidence",
+      "identity",
+      "prices"
+    ]
+  },
+  {
+    "id": "shindagha-visit",
+    "owner": "Al Shindagha Museum via Visit Dubai Experiences",
+    "url": "https://experiences.visitdubai.com/productDetail/84101",
+    "reviewed_on": "2026-11-05",
+    "approved": true,
+    "review_note": "Selected atomic facts and original annotations only; no page bodies, images or general scraping permission.",
+    "permitted_use": "Local manually reviewed factual catalog with attribution.",
+    "attribution": "Al Shindagha Museum via Visit Dubai Experiences",
+    "persistence": true,
+    "export": true,
+    "max_retention_days": null,
+    "allowed_fields": [
+      "evidence",
+      "identity",
+      "hours"
+    ]
+  },
+  {
+    "id": "jumeirah-mosque",
+    "owner": "Jumeirah Mosque / SMCCU",
+    "url": "https://www.jumeirahmosque.ae/mosque-visit-public/",
+    "reviewed_on": "2026-11-15",
+    "approved": true,
+    "review_note": "Selected atomic facts and original annotations only; no page bodies, images or general scraping permission.",
+    "permitted_use": "Local manually reviewed factual catalog with attribution.",
+    "attribution": "Jumeirah Mosque / SMCCU",
+    "persistence": true,
+    "export": true,
+    "max_retention_days": null,
+    "allowed_fields": [
+      "evidence",
+      "identity",
+      "hours",
+      "prices"
+    ]
+  },
+  {
+    "id": "rove-marina-room",
+    "owner": "Rove Hotels",
+    "url": "https://www.rovehotels.com/en/hotels/rove-dubai-marina/",
+    "reviewed_on": "2026-11-05",
+    "approved": true,
+    "review_note": "Selected atomic facts and original annotations only; no page bodies, images or general scraping permission.",
+    "permitted_use": "Local manually reviewed factual catalog with attribution.",
+    "attribution": "Rove Hotels",
+    "persistence": true,
+    "export": true,
+    "max_retention_days": null,
+    "allowed_fields": [
+      "evidence",
+      "accommodation"
+    ]
+  },
+  {
+    "id": "kite-public-entry",
+    "owner": "Sole Mio (Kite Beach operator)",
+    "url": "https://solemio.ae/kite-beach/",
+    "reviewed_on": "2026-11-15",
+    "approved": true,
+    "review_note": "Manually checked atomic facts only; no page bodies or images retained.",
+    "permitted_use": "Attributed local factual records; no general scraping licence claimed.",
+    "attribution": "Sole Mio (Kite Beach operator)",
+    "persistence": true,
+    "export": true,
+    "max_retention_days": null,
+    "allowed_fields": [
+      "evidence",
+      "prices"
+    ]
+  },
+  {
+    "id": "alseef-public-entry",
+    "owner": "Emirates Dubai Experience",
+    "url": "https://www.emirates.com/uk/english/dubai-experience/activities/1025/al-se/",
+    "reviewed_on": "2026-11-15",
+    "approved": true,
+    "review_note": "Manually checked atomic facts only; no page bodies or images retained.",
+    "permitted_use": "Attributed local factual records; no general scraping licence claimed.",
+    "attribution": "Emirates Dubai Experience",
+    "persistence": true,
+    "export": true,
+    "max_retention_days": null,
+    "allowed_fields": [
+      "evidence",
+      "prices"
+    ]
+  },
+  {
+    "id": "mall-hours",
+    "owner": "Emaar / Dubai Mall",
+    "url": "https://www.thedubaimall.com/en/plan-your-visit/opening-hours",
+    "reviewed_on": "2026-11-15",
+    "approved": true,
+    "review_note": "Manually checked atomic facts only; no page bodies or images retained.",
+    "permitted_use": "Attributed local factual records; no general scraping licence claimed.",
+    "attribution": "Emaar / Dubai Mall",
+    "persistence": true,
+    "export": true,
+    "max_retention_days": null,
+    "allowed_fields": [
+      "evidence",
+      "hours"
+    ]
+  },
+  {
+    "id": "rove-jbr-room",
+    "owner": "Rove Hotels",
+    "url": "https://www.rovehotels.com/en/hotels/rove-jbr/",
+    "reviewed_on": "2026-11-15",
+    "approved": true,
+    "review_note": "Manually checked atomic facts only; no page bodies or images retained.",
+    "permitted_use": "Attributed local factual records; no general scraping licence claimed.",
+    "attribution": "Rove Hotels",
+    "persistence": true,
+    "export": true,
+    "max_retention_days": null,
+    "allowed_fields": [
+      "evidence",
+      "accommodation"
+    ]
+  },
+  {
+    "id": "rove-la-mer-room",
+    "owner": "Rove Hotels",
+    "url": "https://www.rovehotels.com/en/hotels/rove-la-mer-beach/",
+    "reviewed_on": "2026-11-15",
+    "approved": true,
+    "review_note": "Manually checked atomic facts only; no page bodies or images retained.",
+    "permitted_use": "Attributed local factual records; no general scraping licence claimed.",
+    "attribution": "Rove Hotels",
+    "persistence": true,
+    "export": true,
+    "max_retention_days": null,
+    "allowed_fields": [
+      "evidence",
+      "accommodation"
+    ]
+  },
+  {
+    "id": "fostay-marina-20261115",
+    "owner": "Fostay / hotel supplier",
+    "url": "https://fostay.com/agents",
+    "reviewed_on": "2026-11-15",
+    "approved": true,
+    "review_note": "Public agent research endpoint and terms checked. Selected atomic quote facts only; no bulk copying or booking. Terms: https://fostay.com/terms",
+    "permitted_use": "Attributed local factual research snapshot; no general scraping or redistribution licence claimed.",
+    "attribution": "Fostay",
+    "persistence": true,
+    "export": true,
+    "max_retention_days": null,
+    "allowed_fields": [
+      "evidence",
+      "prices",
+      "accommodation"
+    ]
+  },
+  {
+    "id": "phase2-assumptions",
+    "owner": "Project planning estimates",
+    "url": "docs/phase2-example.md",
+    "reviewed_on": "2026-11-15",
+    "approved": true,
+    "review_note": "Explicit opt-in planning allowances, not supplier quotes. Meal: AED 30-80 per person per meal including fees. Ticket allowance: published base to base*1.05+10, covering a provisional VAT/fee reserve. Road timing: ceil(OSRM seconds/60)+10 to twice that value+10, including access, waiting and traffic allowance. Taxi spending allowance per traveler: ceil(km*2.5+15) to ceil(km*4+35), inclusive of a provisional toll/fee reserve. None is a guaranteed maximum. Recurring opening schedules projected ONLY onto 20-23 November 2026; exceptions require reconfirmation.",
+    "permitted_use": "Attributed atomic factual snapshot and original estimates; OSM-derived records under ODbL. No page bodies, images or general scraping rights.",
+    "attribution": "Project planning estimates",
+    "persistence": true,
+    "export": true,
+    "max_retention_days": null,
+    "allowed_fields": [
+      "evidence",
+      "prices",
+      "hours",
+      "routes",
+      "tariffs"
+    ]
+  },
+  {
+    "id": "osrm-nov15",
+    "owner": "OpenStreetMap contributors / OSRM / FOSSGIS",
+    "url": "https://router.project-osrm.org/table/v1/driving/55.145,25.081;55.301,25.235;55.29,25.269;55.279,25.198;55.309,25.265?annotations=duration,distance&generate_hints=false",
+    "reviewed_on": "2026-11-15",
+    "approved": true,
+    "review_note": "Public driving table fetched 15 November 2026; code Ok for all 25 cells, no fallback cells. Five approximate catalog coordinates; snapped distances 18.895,46.600,34.167,22.850,3.397 metres. Road connectivity between snapped points supports a taxi estimate, not exact hotel/entrance access, traffic, dispatch or accessibility. OSM data: https://www.openstreetmap.org/copyright ; ODbL https://opendatacommons.org/licenses/odbl/1-0/ . Tiny educational snapshot, no runtime API dependency.",
+    "permitted_use": "Attributed atomic factual snapshot and original estimates; OSM-derived records under ODbL. No page bodies, images or general scraping rights.",
+    "attribution": "OpenStreetMap contributors / OSRM / FOSSGIS",
+    "persistence": true,
+    "export": true,
+    "max_retention_days": null,
+    "allowed_fields": [
+      "evidence",
+      "routes",
+      "prices"
+    ]
+  },
+  {
+    "id": "alseef-hours",
+    "owner": "Dubai Holding / Souk Al Seef",
+    "url": "https://soukalseef.ae/en/plan-your-visit",
+    "reviewed_on": "2026-11-15",
+    "approved": true,
+    "review_note": "Operator retail hours checked 15 November 2026: Mon-Thu 10:00-22:00, Fri-Sun 10:00-23:00. Use these conservative visiting hours, not a claim of unrestricted 24-hour access.",
+    "permitted_use": "Attributed atomic factual snapshot and original estimates; OSM-derived records under ODbL. No page bodies, images or general scraping rights.",
+    "attribution": "Dubai Holding / Souk Al Seef",
+    "persistence": true,
+    "export": true,
+    "max_retention_days": null,
+    "allowed_fields": [
+      "evidence",
+      "hours"
+    ]
+  },
+  {
+    "id": "mall-free",
+    "owner": "Emirates Dubai Experience",
+    "url": "https://www.emirates.com/de/english/dubai-experience/activities/964/the-dubai-mal/",
+    "reviewed_on": "2026-11-15",
+    "approved": true,
+    "review_note": "Emirates lists Dubai Mall as a free activity. Browsing only; purchases, parking, food and separately ticketed attractions excluded.",
+    "permitted_use": "Attributed atomic factual snapshot and original estimates; OSM-derived records under ODbL. No page bodies, images or general scraping rights.",
+    "attribution": "Emirates Dubai Experience",
+    "persistence": true,
+    "export": true,
+    "max_retention_days": null,
+    "allowed_fields": [
+      "evidence",
+      "prices"
+    ]
+  },
+  {
+    "id": "shindagha-hours-brochure",
+    "owner": "Dubai Culture / Al Shindagha Museum",
+    "url": "https://alshindagha.dubaiculture.gov.ae/Documents/ASM-Brochure-English.pdf",
+    "reviewed_on": "2026-11-15",
+    "approved": true,
+    "review_note": "Official brochure's indexed Plan Your Visit section checked 15 November 2026: daily 10:00-20:00. Direct PDF retrieval timed out; only indexed atomic opening fact retained, no brochure copied. Special-date exceptions unconfirmed.",
+    "permitted_use": "Attributed atomic factual snapshot and original estimates; OSM-derived records under ODbL. No page bodies, images or general scraping rights.",
+    "attribution": "Dubai Culture / Al Shindagha Museum",
+    "persistence": true,
+    "export": true,
+    "max_retention_days": null,
+    "allowed_fields": [
+      "evidence",
+      "hours"
+    ]
+  }
+]

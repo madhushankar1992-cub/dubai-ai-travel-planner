@@ -1,0 +1,1276 @@
+{
+  "schema_version": "1.0",
+  "run_id": "local-871e0c847e842b0a",
+  "graph_version": "deterministic-v1",
+  "request": {
+    "id": "four-day-cultural-trip",
+    "schema_version": "1.0",
+    "destination": "Dubai",
+    "days": 4,
+    "timezone": "Asia/Dubai",
+    "arrival": null,
+    "departure": null,
+    "arrival_minute": 540,
+    "departure_minute": 1200,
+    "check_in": null,
+    "check_out": null,
+    "travelers": {
+      "adults": 1,
+      "child_age_bands": []
+    },
+    "rooms": 1,
+    "nights": 3,
+    "budget": "5000",
+    "budget_scope": "total_trip",
+    "interests": [
+      "culture",
+      "food",
+      "beach"
+    ],
+    "exclusions": [
+      "flights"
+    ],
+    "mobility_needs": [],
+    "transport_preferences": [],
+    "constraints": [],
+    "assumptions": [
+      "Example only: one adult, three confirmed hotel nights, dates unspecified."
+    ],
+    "candidate_ids": [],
+    "price_choices": {},
+    "meal_allowance_price_id": null,
+    "accept_planning_estimates": false
+  },
+  "status": "partial",
+  "days": [
+    {
+      "day": 1,
+      "activities": [
+        {
+          "id": "day-1-mbr-library",
+          "place_id": "mbr-library",
+          "window": {
+            "kind": "relative",
+            "day": 1,
+            "start_minute": 600,
+            "end_minute": 720
+          },
+          "participants": 1,
+          "booking_required": null,
+          "hours_check": "unknown",
+          "evidence_ids": [
+            "ev-city-guide",
+            "ev-editorial"
+          ]
+        },
+        {
+          "id": "day-1-alserkal",
+          "place_id": "alserkal",
+          "window": {
+            "kind": "relative",
+            "day": 1,
+            "start_minute": 795,
+            "end_minute": 945
+          },
+          "participants": 1,
+          "booking_required": null,
+          "hours_check": "unknown",
+          "evidence_ids": [
+            "ev-culture",
+            "ev-editorial"
+          ]
+        }
+      ],
+      "routes": [
+        {
+          "id": "day-1-route-alserkal-area-bur-dubai-taxi",
+          "origin_id": "alserkal",
+          "destination_id": "area-bur-dubai",
+          "mode": "taxi",
+          "duration_min": 53,
+          "duration_max": 96,
+          "departure": null,
+          "method": "Illustrative bound from approximate centroid great-circle distance × 1.5 / assumed 25 km/h; 10 minute minimum, upper=max(lower+15,lower×1.8). No route existence, crossing, accessibility, congestion or service verified.",
+          "evidence_ids": [
+            "ev-editorial"
+          ],
+          "price_id": null,
+          "status": "estimated",
+          "feasibility_supported": false,
+          "includes_contingency": true
+        }
+      ],
+      "breaks": [
+        {
+          "kind": "meal",
+          "window": {
+            "kind": "relative",
+            "day": 1,
+            "start_minute": 960,
+            "end_minute": 1005
+          }
+        }
+      ],
+      "meal_rest_notes": [
+        "Activity buffer 15 min; travel contingency 20% unless already included.",
+        "Missing routes reserve 60 minutes provisionally and prevent validation."
+      ],
+      "base_assumption": "area-bur-dubai: approximate area centroid; property unconfirmed"
+    },
+    {
+      "day": 2,
+      "activities": [
+        {
+          "id": "day-2-al-fahidi",
+          "place_id": "al-fahidi",
+          "window": {
+            "kind": "relative",
+            "day": 2,
+            "start_minute": 565,
+            "end_minute": 685
+          },
+          "participants": 1,
+          "booking_required": null,
+          "hours_check": "unknown",
+          "evidence_ids": [
+            "ev-culture",
+            "ev-editorial"
+          ]
+        },
+        {
+          "id": "day-2-al-fanar",
+          "place_id": "al-fanar",
+          "window": {
+            "kind": "relative",
+            "day": 2,
+            "start_minute": 760,
+            "end_minute": 850
+          },
+          "participants": 1,
+          "booking_required": null,
+          "hours_check": "unknown",
+          "evidence_ids": [
+            "ev-alfanar",
+            "ev-editorial"
+          ]
+        },
+        {
+          "id": "day-2-al-seef",
+          "place_id": "al-seef",
+          "window": {
+            "kind": "relative",
+            "day": 2,
+            "start_minute": 890,
+            "end_minute": 1010
+          },
+          "participants": 1,
+          "booking_required": null,
+          "hours_check": "unknown",
+          "evidence_ids": [
+            "ev-alseef",
+            "ev-alseef-hours",
+            "ev-editorial"
+          ]
+        }
+      ],
+      "routes": [
+        {
+          "id": "day-2-route-area-bur-dubai-al-fahidi-taxi",
+          "origin_id": "area-bur-dubai",
+          "destination_id": "al-fahidi",
+          "mode": "taxi",
+          "duration_min": 10,
+          "duration_max": 25,
+          "departure": null,
+          "method": "Illustrative bound from approximate centroid great-circle distance × 1.5 / assumed 25 km/h; 10 minute minimum, upper=max(lower+15,lower×1.8). No route existence, crossing, accessibility, congestion or service verified.",
+          "evidence_ids": [
+            "ev-editorial"
+          ],
+          "price_id": null,
+          "status": "estimated",
+          "feasibility_supported": false,
+          "includes_contingency": true
+        },
+        {
+          "id": "day-2-route-al-fanar-al-seef-walk",
+          "origin_id": "al-fanar",
+          "destination_id": "al-seef",
+          "mode": "walk",
+          "duration_min": 10,
+          "duration_max": 25,
+          "departure": null,
+          "method": "Illustrative bound from approximate centroid great-circle distance × 1.5 / assumed 4 km/h; 10 minute minimum, upper=max(lower+15,lower×1.8). No route existence, crossing, accessibility, congestion or service verified.",
+          "evidence_ids": [
+            "ev-editorial"
+          ],
+          "price_id": null,
+          "status": "estimated",
+          "feasibility_supported": false,
+          "includes_contingency": true
+        }
+      ],
+      "breaks": [
+        {
+          "kind": "rest",
+          "window": {
+            "kind": "relative",
+            "day": 2,
+            "start_minute": 1025,
+            "end_minute": 1070
+          }
+        }
+      ],
+      "meal_rest_notes": [
+        "Activity buffer 15 min; travel contingency 20% unless already included.",
+        "Missing routes reserve 60 minutes provisionally and prevent validation."
+      ],
+      "base_assumption": "area-bur-dubai: approximate area centroid; property unconfirmed"
+    },
+    {
+      "day": 3,
+      "activities": [
+        {
+          "id": "day-3-dubai-frame",
+          "place_id": "dubai-frame",
+          "window": {
+            "kind": "relative",
+            "day": 3,
+            "start_minute": 565,
+            "end_minute": 685
+          },
+          "participants": 1,
+          "booking_required": null,
+          "hours_check": "unknown",
+          "evidence_ids": [
+            "ev-editorial",
+            "ev-frame"
+          ]
+        },
+        {
+          "id": "day-3-al-khayma",
+          "place_id": "al-khayma",
+          "window": {
+            "kind": "relative",
+            "day": 3,
+            "start_minute": 760,
+            "end_minute": 850
+          },
+          "participants": 1,
+          "booking_required": null,
+          "hours_check": "unknown",
+          "evidence_ids": [
+            "ev-editorial",
+            "ev-food-tour"
+          ]
+        }
+      ],
+      "routes": [
+        {
+          "id": "day-3-route-area-bur-dubai-dubai-frame-taxi",
+          "origin_id": "area-bur-dubai",
+          "destination_id": "dubai-frame",
+          "mode": "taxi",
+          "duration_min": 10,
+          "duration_max": 25,
+          "departure": null,
+          "method": "Illustrative bound from approximate centroid great-circle distance × 1.5 / assumed 25 km/h; 10 minute minimum, upper=max(lower+15,lower×1.8). No route existence, crossing, accessibility, congestion or service verified.",
+          "evidence_ids": [
+            "ev-editorial"
+          ],
+          "price_id": null,
+          "status": "estimated",
+          "feasibility_supported": false,
+          "includes_contingency": true
+        }
+      ],
+      "breaks": [
+        {
+          "kind": "rest",
+          "window": {
+            "kind": "relative",
+            "day": 3,
+            "start_minute": 865,
+            "end_minute": 910
+          }
+        }
+      ],
+      "meal_rest_notes": [
+        "Activity buffer 15 min; travel contingency 20% unless already included.",
+        "Missing routes reserve 60 minutes provisionally and prevent validation."
+      ],
+      "base_assumption": "area-bur-dubai: approximate area centroid; property unconfirmed"
+    },
+    {
+      "day": 4,
+      "activities": [
+        {
+          "id": "day-4-shindagha",
+          "place_id": "shindagha",
+          "window": {
+            "kind": "relative",
+            "day": 4,
+            "start_minute": 600,
+            "end_minute": 780
+          },
+          "participants": 1,
+          "booking_required": null,
+          "hours_check": "unknown",
+          "evidence_ids": [
+            "ev-culture",
+            "ev-editorial",
+            "ev-shindagha-hours-brochure"
+          ]
+        },
+        {
+          "id": "day-4-al-ustad",
+          "place_id": "al-ustad",
+          "window": {
+            "kind": "relative",
+            "day": 4,
+            "start_minute": 855,
+            "end_minute": 945
+          },
+          "participants": 1,
+          "booking_required": null,
+          "hours_check": "unknown",
+          "evidence_ids": [
+            "ev-editorial",
+            "ev-food-tour"
+          ]
+        }
+      ],
+      "routes": [],
+      "breaks": [
+        {
+          "kind": "rest",
+          "window": {
+            "kind": "relative",
+            "day": 4,
+            "start_minute": 960,
+            "end_minute": 1005
+          }
+        }
+      ],
+      "meal_rest_notes": [
+        "Activity buffer 15 min; travel contingency 20% unless already included.",
+        "Missing routes reserve 60 minutes provisionally and prevent validation."
+      ],
+      "base_assumption": "area-bur-dubai: approximate area centroid; property unconfirmed"
+    }
+  ],
+  "accommodation": [
+    {
+      "id": "stay-bur-dubai",
+      "area_id": "area-bur-dubai",
+      "name": "Bur Dubai accommodation search",
+      "max_occupancy": null,
+      "max_adults": null,
+      "max_children": null,
+      "verified_child_age_bands": null,
+      "price_id": "price-stay-bur-dubai",
+      "availability": "unknown",
+      "evidence_ids": [
+        "ev-neighborhoods"
+      ],
+      "notes": "Choose a property and obtain a dated per-room quote including mandatory fees before asserting budget feasibility."
+    }
+  ],
+  "budget": {
+    "known_subtotal": "100",
+    "estimated_low": "100",
+    "estimated_high": "100",
+    "missing_required_costs": [
+      "day-1-mbr-library-price-mbr-library: unknown quantity or price bounds",
+      "day-1-route-alserkal-area-bur-dubai-taxi: transport cost basis unavailable",
+      "day-1: prices for 3 remaining meals per traveler",
+      "day-2-al-fahidi-price-al-fahidi: unknown quantity or price bounds",
+      "day-2-al-fanar-price-al-fanar: unknown quantity or price bounds",
+      "day-2-route-al-fanar-al-seef-walk: transport cost basis unavailable",
+      "day-2-route-area-bur-dubai-al-fahidi-taxi: transport cost basis unavailable",
+      "day-2: prices for 2 remaining meals per traveler",
+      "day-3-al-khayma-price-al-khayma: unknown quantity or price bounds",
+      "day-3-dubai-frame-price-frame-adult: mandatory fees unresolved",
+      "day-3-route-area-bur-dubai-dubai-frame-taxi: transport cost basis unavailable",
+      "day-3: prices for 2 remaining meals per traveler",
+      "day-4-al-ustad-price-al-ustad: unknown quantity or price bounds",
+      "day-4-shindagha-price-shindagha: mandatory fees unresolved",
+      "day-4: prices for 2 remaining meals per traveler",
+      "stay-price-stay-bur-dubai: unknown quantity or price bounds"
+    ],
+    "contingency": null,
+    "contingency_low": null,
+    "total_low": null,
+    "total_high": null,
+    "cap": "5000",
+    "compliance": "unknown",
+    "exclusions": [
+      "flights"
+    ]
+  },
+  "findings": [
+    {
+      "rule_id": "OCCUPANCY_UNKNOWN",
+      "severity": "error",
+      "entity_ids": [],
+      "evidence_ids": [],
+      "owner": "logistics",
+      "message": "Confirm property occupancy for the party",
+      "proposed_action": "Resolve the constraint or obtain applicable evidence, then recompute.",
+      "hard": true
+    },
+    {
+      "rule_id": "HOURS_UNKNOWN",
+      "severity": "error",
+      "entity_ids": [
+        "mbr-library"
+      ],
+      "evidence_ids": [],
+      "owner": "logistics",
+      "message": "No applicable operating window; prose hours are insufficient",
+      "proposed_action": "Resolve the constraint or obtain applicable evidence, then recompute.",
+      "hard": true
+    },
+    {
+      "rule_id": "ROUTE_MISSING",
+      "severity": "error",
+      "entity_ids": [
+        "area-bur-dubai",
+        "mbr-library"
+      ],
+      "evidence_ids": [],
+      "owner": "logistics",
+      "message": "Exactly one connecting leg is required",
+      "proposed_action": "Resolve the constraint or obtain applicable evidence, then recompute.",
+      "hard": true
+    },
+    {
+      "rule_id": "HOURS_UNKNOWN",
+      "severity": "error",
+      "entity_ids": [
+        "alserkal"
+      ],
+      "evidence_ids": [],
+      "owner": "logistics",
+      "message": "No applicable operating window; prose hours are insufficient",
+      "proposed_action": "Resolve the constraint or obtain applicable evidence, then recompute.",
+      "hard": true
+    },
+    {
+      "rule_id": "ROUTE_MISSING",
+      "severity": "error",
+      "entity_ids": [
+        "mbr-library",
+        "alserkal"
+      ],
+      "evidence_ids": [],
+      "owner": "logistics",
+      "message": "Exactly one connecting leg is required",
+      "proposed_action": "Resolve the constraint or obtain applicable evidence, then recompute.",
+      "hard": true
+    },
+    {
+      "rule_id": "ROUTE_UNSUPPORTED",
+      "severity": "error",
+      "entity_ids": [
+        "day-1-route-alserkal-area-bur-dubai-taxi"
+      ],
+      "evidence_ids": [
+        "ev-editorial"
+      ],
+      "owner": "logistics",
+      "message": "Route existence/timing is unverified",
+      "proposed_action": "Resolve the constraint or obtain applicable evidence, then recompute.",
+      "hard": true
+    },
+    {
+      "rule_id": "HOURS_UNKNOWN",
+      "severity": "error",
+      "entity_ids": [
+        "al-fahidi"
+      ],
+      "evidence_ids": [],
+      "owner": "logistics",
+      "message": "No applicable operating window; prose hours are insufficient",
+      "proposed_action": "Resolve the constraint or obtain applicable evidence, then recompute.",
+      "hard": true
+    },
+    {
+      "rule_id": "ROUTE_UNSUPPORTED",
+      "severity": "error",
+      "entity_ids": [
+        "day-2-route-area-bur-dubai-al-fahidi-taxi"
+      ],
+      "evidence_ids": [
+        "ev-editorial"
+      ],
+      "owner": "logistics",
+      "message": "Route existence/timing is unverified",
+      "proposed_action": "Resolve the constraint or obtain applicable evidence, then recompute.",
+      "hard": true
+    },
+    {
+      "rule_id": "HOURS_UNKNOWN",
+      "severity": "error",
+      "entity_ids": [
+        "al-fanar"
+      ],
+      "evidence_ids": [],
+      "owner": "logistics",
+      "message": "No applicable operating window; prose hours are insufficient",
+      "proposed_action": "Resolve the constraint or obtain applicable evidence, then recompute.",
+      "hard": true
+    },
+    {
+      "rule_id": "ROUTE_MISSING",
+      "severity": "error",
+      "entity_ids": [
+        "al-fahidi",
+        "al-fanar"
+      ],
+      "evidence_ids": [],
+      "owner": "logistics",
+      "message": "Exactly one connecting leg is required",
+      "proposed_action": "Resolve the constraint or obtain applicable evidence, then recompute.",
+      "hard": true
+    },
+    {
+      "rule_id": "HOURS_UNKNOWN",
+      "severity": "error",
+      "entity_ids": [
+        "al-seef"
+      ],
+      "evidence_ids": [],
+      "owner": "logistics",
+      "message": "No applicable operating window; prose hours are insufficient",
+      "proposed_action": "Resolve the constraint or obtain applicable evidence, then recompute.",
+      "hard": true
+    },
+    {
+      "rule_id": "ROUTE_UNSUPPORTED",
+      "severity": "error",
+      "entity_ids": [
+        "day-2-route-al-fanar-al-seef-walk"
+      ],
+      "evidence_ids": [
+        "ev-editorial"
+      ],
+      "owner": "logistics",
+      "message": "Route existence/timing is unverified",
+      "proposed_action": "Resolve the constraint or obtain applicable evidence, then recompute.",
+      "hard": true
+    },
+    {
+      "rule_id": "ROUTE_MISSING",
+      "severity": "error",
+      "entity_ids": [
+        "al-seef",
+        "area-bur-dubai"
+      ],
+      "evidence_ids": [],
+      "owner": "logistics",
+      "message": "Exactly one connecting leg is required",
+      "proposed_action": "Resolve the constraint or obtain applicable evidence, then recompute.",
+      "hard": true
+    },
+    {
+      "rule_id": "HOURS_UNKNOWN",
+      "severity": "error",
+      "entity_ids": [
+        "dubai-frame"
+      ],
+      "evidence_ids": [],
+      "owner": "logistics",
+      "message": "No applicable operating window; prose hours are insufficient",
+      "proposed_action": "Resolve the constraint or obtain applicable evidence, then recompute.",
+      "hard": true
+    },
+    {
+      "rule_id": "ROUTE_UNSUPPORTED",
+      "severity": "error",
+      "entity_ids": [
+        "day-3-route-area-bur-dubai-dubai-frame-taxi"
+      ],
+      "evidence_ids": [
+        "ev-editorial"
+      ],
+      "owner": "logistics",
+      "message": "Route existence/timing is unverified",
+      "proposed_action": "Resolve the constraint or obtain applicable evidence, then recompute.",
+      "hard": true
+    },
+    {
+      "rule_id": "HOURS_UNKNOWN",
+      "severity": "error",
+      "entity_ids": [
+        "al-khayma"
+      ],
+      "evidence_ids": [],
+      "owner": "logistics",
+      "message": "No applicable operating window; prose hours are insufficient",
+      "proposed_action": "Resolve the constraint or obtain applicable evidence, then recompute.",
+      "hard": true
+    },
+    {
+      "rule_id": "ROUTE_MISSING",
+      "severity": "error",
+      "entity_ids": [
+        "dubai-frame",
+        "al-khayma"
+      ],
+      "evidence_ids": [],
+      "owner": "logistics",
+      "message": "Exactly one connecting leg is required",
+      "proposed_action": "Resolve the constraint or obtain applicable evidence, then recompute.",
+      "hard": true
+    },
+    {
+      "rule_id": "ROUTE_MISSING",
+      "severity": "error",
+      "entity_ids": [
+        "al-khayma",
+        "area-bur-dubai"
+      ],
+      "evidence_ids": [],
+      "owner": "logistics",
+      "message": "Exactly one connecting leg is required",
+      "proposed_action": "Resolve the constraint or obtain applicable evidence, then recompute.",
+      "hard": true
+    },
+    {
+      "rule_id": "HOURS_UNKNOWN",
+      "severity": "error",
+      "entity_ids": [
+        "shindagha"
+      ],
+      "evidence_ids": [],
+      "owner": "logistics",
+      "message": "No applicable operating window; prose hours are insufficient",
+      "proposed_action": "Resolve the constraint or obtain applicable evidence, then recompute.",
+      "hard": true
+    },
+    {
+      "rule_id": "ROUTE_MISSING",
+      "severity": "error",
+      "entity_ids": [
+        "area-bur-dubai",
+        "shindagha"
+      ],
+      "evidence_ids": [],
+      "owner": "logistics",
+      "message": "Exactly one connecting leg is required",
+      "proposed_action": "Resolve the constraint or obtain applicable evidence, then recompute.",
+      "hard": true
+    },
+    {
+      "rule_id": "HOURS_UNKNOWN",
+      "severity": "error",
+      "entity_ids": [
+        "al-ustad"
+      ],
+      "evidence_ids": [],
+      "owner": "logistics",
+      "message": "No applicable operating window; prose hours are insufficient",
+      "proposed_action": "Resolve the constraint or obtain applicable evidence, then recompute.",
+      "hard": true
+    },
+    {
+      "rule_id": "ROUTE_MISSING",
+      "severity": "error",
+      "entity_ids": [
+        "shindagha",
+        "al-ustad"
+      ],
+      "evidence_ids": [],
+      "owner": "logistics",
+      "message": "Exactly one connecting leg is required",
+      "proposed_action": "Resolve the constraint or obtain applicable evidence, then recompute.",
+      "hard": true
+    },
+    {
+      "rule_id": "ROUTE_MISSING",
+      "severity": "error",
+      "entity_ids": [
+        "al-ustad",
+        "area-bur-dubai"
+      ],
+      "evidence_ids": [],
+      "owner": "logistics",
+      "message": "Exactly one connecting leg is required",
+      "proposed_action": "Resolve the constraint or obtain applicable evidence, then recompute.",
+      "hard": true
+    },
+    {
+      "rule_id": "BUDGET_UNKNOWN",
+      "severity": "error",
+      "entity_ids": [],
+      "evidence_ids": [],
+      "owner": "budget",
+      "message": "Required costs, fees or scope remain unresolved",
+      "proposed_action": "Resolve the constraint or obtain applicable evidence, then recompute.",
+      "hard": true
+    }
+  ],
+  "assumptions": [
+    "Example only: one adult, three confirmed hotel nights, dates unspecified.",
+    "Deterministic local planning; no model-driven agents.",
+    "Three meals per day require pricing; property and route evidence may be incomplete."
+  ],
+  "sources": [
+    {
+      "id": "ev-rove-offer",
+      "source_id": "rove-offer",
+      "url": "https://www.rovehotels.com/en/offer/beach-staycation/",
+      "local_record_id": null,
+      "retrieved_at": "2026-11-15T00:00:00Z",
+      "source_updated_at": null,
+      "applicable_from": "2026-10-06",
+      "applicable_to": "2026-11-30",
+      "dataset_version": "2026-11-15.2",
+      "quality": "known",
+      "attribution": "Rove Hotels",
+      "retention_policy_id": "rove-offer",
+      "method": "Official page directly rechecked 15 November 2026; selected facts unchanged. Review-day timestamp, not exact fetch time; no live inventory.",
+      "max_age_days": 30
+    },
+    {
+      "id": "ev-ravi-menu",
+      "source_id": "ravi-menu",
+      "url": "https://ravirestaurants.ae/menu/",
+      "local_record_id": null,
+      "retrieved_at": "2026-11-05T00:00:00Z",
+      "source_updated_at": null,
+      "applicable_from": null,
+      "applicable_to": null,
+      "dataset_version": "2026-11-15.2",
+      "quality": "known",
+      "attribution": "Ravi Restaurants",
+      "retention_policy_id": "ravi-menu",
+      "method": "Official page directly checked on 5 November 2026; selected numerical facts only. Exact retrieval time not retained.",
+      "max_age_days": 180
+    },
+    {
+      "id": "ev-editorial",
+      "source_id": "editorial",
+      "url": null,
+      "local_record_id": "editorial-method-v1",
+      "retrieved_at": "2026-11-05T00:00:00Z",
+      "source_updated_at": null,
+      "applicable_from": null,
+      "applicable_to": null,
+      "dataset_version": "2026-11-15.2",
+      "quality": "estimated",
+      "attribution": "Project editorial estimates",
+      "retention_policy_id": "editorial",
+      "method": "Original estimates: approximate map centroids, visit allowances, and heuristic route ranges. Not observed entrances, live travel times or market prices.",
+      "max_age_days": 180
+    },
+    {
+      "id": "ev-rta",
+      "source_id": "rta",
+      "url": "https://rta.ae/wps/portal/rta/ae/public-transport/Nol-Fares",
+      "local_record_id": null,
+      "retrieved_at": "2026-11-05T00:00:00Z",
+      "source_updated_at": null,
+      "applicable_from": null,
+      "applicable_to": null,
+      "dataset_version": "2026-11-15.2",
+      "quality": "known",
+      "attribution": "Roads and Transport Authority",
+      "retention_policy_id": "rta",
+      "method": "Official RTA indexed fare table checked on 5 November 2026; direct page timed out.",
+      "max_age_days": 30
+    },
+    {
+      "id": "ev-frame",
+      "source_id": "frame",
+      "url": "https://www.dubaiframe.ae/en/plan-your-visit",
+      "local_record_id": null,
+      "retrieved_at": "2026-11-15T00:00:00Z",
+      "source_updated_at": null,
+      "applicable_from": null,
+      "applicable_to": null,
+      "dataset_version": "2026-11-15.2",
+      "quality": "known",
+      "attribution": "Dubai Municipality / Dubai Frame",
+      "retention_policy_id": "frame",
+      "method": "Official page directly rechecked 15 November 2026; selected facts unchanged. Review-day timestamp, not exact fetch time; no live inventory.",
+      "max_age_days": 30
+    },
+    {
+      "id": "ev-neighborhoods",
+      "source_id": "neighborhoods",
+      "url": "https://www.visitdubai.com/en/explore-dubai/dubai-neighbourhoods",
+      "local_record_id": null,
+      "retrieved_at": "2026-11-05T00:00:00Z",
+      "source_updated_at": null,
+      "applicable_from": null,
+      "applicable_to": null,
+      "dataset_version": "2026-11-15.2",
+      "quality": "known",
+      "attribution": "Dubai Department of Economy and Tourism",
+      "retention_policy_id": "neighborhoods",
+      "method": "Manually reviewed selected factual information from public official source/search result on 5 November 2026; linked for verification.",
+      "max_age_days": 180
+    },
+    {
+      "id": "ev-culture",
+      "source_id": "culture",
+      "url": "https://www.visitdubai.com/en/articles/dubais-top-11-cultural-locations",
+      "local_record_id": null,
+      "retrieved_at": "2026-11-05T00:00:00Z",
+      "source_updated_at": null,
+      "applicable_from": null,
+      "applicable_to": null,
+      "dataset_version": "2026-11-15.2",
+      "quality": "known",
+      "attribution": "Dubai Department of Economy and Tourism",
+      "retention_policy_id": "culture",
+      "method": "Manually reviewed selected factual information from public official source/search result on 5 November 2026; linked for verification.",
+      "max_age_days": 180
+    },
+    {
+      "id": "ev-city-guide",
+      "source_id": "city-guide",
+      "url": "https://www.visitdubai.com/-/media/Images/pdf/2026/dubai-city-guide-en-2026.pdf",
+      "local_record_id": null,
+      "retrieved_at": "2026-11-05T00:00:00Z",
+      "source_updated_at": null,
+      "applicable_from": null,
+      "applicable_to": null,
+      "dataset_version": "2026-11-15.2",
+      "quality": "known",
+      "attribution": "Dubai Department of Economy and Tourism",
+      "retention_policy_id": "city-guide",
+      "method": "Manually reviewed selected factual information from public official source/search result on 5 November 2026; linked for verification.",
+      "max_age_days": 180
+    },
+    {
+      "id": "ev-alseef",
+      "source_id": "alseef",
+      "url": "https://soukalseef.ae/en/discover/attractions",
+      "local_record_id": null,
+      "retrieved_at": "2026-11-05T00:00:00Z",
+      "source_updated_at": null,
+      "applicable_from": null,
+      "applicable_to": null,
+      "dataset_version": "2026-11-15.2",
+      "quality": "known",
+      "attribution": "Souk Al Seef",
+      "retention_policy_id": "alseef",
+      "method": "Manually reviewed selected factual information from public official source/search result on 5 November 2026; linked for verification.",
+      "max_age_days": 180
+    },
+    {
+      "id": "ev-kite",
+      "source_id": "kite",
+      "url": "https://www.visitdubai.com/en/places-to-visit/kite-beach",
+      "local_record_id": null,
+      "retrieved_at": "2026-11-05T00:00:00Z",
+      "source_updated_at": null,
+      "applicable_from": null,
+      "applicable_to": null,
+      "dataset_version": "2026-11-15.2",
+      "quality": "known",
+      "attribution": "Dubai Department of Economy and Tourism",
+      "retention_policy_id": "kite",
+      "method": "Manually reviewed selected factual information from public official source/search result on 5 November 2026; linked for verification.",
+      "max_age_days": 180
+    },
+    {
+      "id": "ev-beaches",
+      "source_id": "beaches",
+      "url": "https://www.visitdubai.com/en/things-to-do/beaches-in-dubai",
+      "local_record_id": null,
+      "retrieved_at": "2026-11-05T00:00:00Z",
+      "source_updated_at": null,
+      "applicable_from": null,
+      "applicable_to": null,
+      "dataset_version": "2026-11-15.2",
+      "quality": "known",
+      "attribution": "Dubai Department of Economy and Tourism",
+      "retention_policy_id": "beaches",
+      "method": "Manually reviewed selected factual information from public official source/search result on 5 November 2026; linked for verification.",
+      "max_age_days": 180
+    },
+    {
+      "id": "ev-marina",
+      "source_id": "marina",
+      "url": "https://www.visitdubai.com/en/articles/a-guide-to-dubai-marina",
+      "local_record_id": null,
+      "retrieved_at": "2026-11-05T00:00:00Z",
+      "source_updated_at": null,
+      "applicable_from": null,
+      "applicable_to": null,
+      "dataset_version": "2026-11-15.2",
+      "quality": "known",
+      "attribution": "Dubai Department of Economy and Tourism",
+      "retention_policy_id": "marina",
+      "method": "Manually reviewed selected factual information from public official source/search result on 5 November 2026; linked for verification.",
+      "max_age_days": 180
+    },
+    {
+      "id": "ev-mall",
+      "source_id": "mall",
+      "url": "https://uae.emaar.com/en/dubai-mall",
+      "local_record_id": null,
+      "retrieved_at": "2026-11-05T00:00:00Z",
+      "source_updated_at": null,
+      "applicable_from": null,
+      "applicable_to": null,
+      "dataset_version": "2026-11-15.2",
+      "quality": "known",
+      "attribution": "Emaar Properties",
+      "retention_policy_id": "mall",
+      "method": "Manually reviewed selected factual information from public official source/search result on 5 November 2026; linked for verification.",
+      "max_age_days": 180
+    },
+    {
+      "id": "ev-tea-house",
+      "source_id": "tea-house",
+      "url": "https://www.visitdubai.com/en/restaurants/arabian-tea-house",
+      "local_record_id": null,
+      "retrieved_at": "2026-11-05T00:00:00Z",
+      "source_updated_at": null,
+      "applicable_from": null,
+      "applicable_to": null,
+      "dataset_version": "2026-11-15.2",
+      "quality": "known",
+      "attribution": "Dubai Department of Economy and Tourism",
+      "retention_policy_id": "tea-house",
+      "method": "Manually reviewed selected factual information from public official source/search result on 5 November 2026; linked for verification.",
+      "max_age_days": 180
+    },
+    {
+      "id": "ev-food-tour",
+      "source_id": "food-tour",
+      "url": "https://www.dubaidet.gov.ae/en/newsroom/press-releases/cultural-food-tours-2026?print=",
+      "local_record_id": null,
+      "retrieved_at": "2026-11-05T00:00:00Z",
+      "source_updated_at": null,
+      "applicable_from": null,
+      "applicable_to": null,
+      "dataset_version": "2026-11-15.2",
+      "quality": "known",
+      "attribution": "Dubai Department of Economy and Tourism",
+      "retention_policy_id": "food-tour",
+      "method": "Manually reviewed selected factual information from public official source/search result on 5 November 2026; linked for verification.",
+      "max_age_days": 180
+    },
+    {
+      "id": "ev-satwa",
+      "source_id": "satwa",
+      "url": "https://www.visitdubai.com/en/explore-dubai/dubai-neighbourhoods/satwa",
+      "local_record_id": null,
+      "retrieved_at": "2026-11-05T00:00:00Z",
+      "source_updated_at": null,
+      "applicable_from": null,
+      "applicable_to": null,
+      "dataset_version": "2026-11-15.2",
+      "quality": "known",
+      "attribution": "Dubai Department of Economy and Tourism",
+      "retention_policy_id": "satwa",
+      "method": "Manually reviewed selected factual information from public official source/search result on 5 November 2026; linked for verification.",
+      "max_age_days": 180
+    },
+    {
+      "id": "ev-buqtair",
+      "source_id": "buqtair",
+      "url": "https://www.visitdubai.com/en/restaurants/bu-qtair",
+      "local_record_id": null,
+      "retrieved_at": "2026-11-05T00:00:00Z",
+      "source_updated_at": null,
+      "applicable_from": null,
+      "applicable_to": null,
+      "dataset_version": "2026-11-15.2",
+      "quality": "known",
+      "attribution": "Dubai Department of Economy and Tourism",
+      "retention_policy_id": "buqtair",
+      "method": "Manually reviewed selected factual information from public official source/search result on 5 November 2026; linked for verification.",
+      "max_age_days": 180
+    },
+    {
+      "id": "ev-alfanar",
+      "source_id": "alfanar",
+      "url": "https://soukalseef.ae/en/discover/dine/al-fanar-seafood-market",
+      "local_record_id": null,
+      "retrieved_at": "2026-11-05T00:00:00Z",
+      "source_updated_at": null,
+      "applicable_from": null,
+      "applicable_to": null,
+      "dataset_version": "2026-11-15.2",
+      "quality": "known",
+      "attribution": "Souk Al Seef",
+      "retention_policy_id": "alfanar",
+      "method": "Manually reviewed selected factual information from public official source/search result on 5 November 2026; linked for verification.",
+      "max_age_days": 180
+    },
+    {
+      "id": "ev-alfanar-barsha-menu",
+      "source_id": "alfanar-barsha-menu",
+      "url": "https://www.alfanarrestaurant.com/menu",
+      "local_record_id": null,
+      "retrieved_at": "2026-11-05T00:00:00Z",
+      "source_updated_at": null,
+      "applicable_from": null,
+      "applicable_to": null,
+      "dataset_version": "2026-11-15.2",
+      "quality": "known",
+      "attribution": "Al Fanar Restaurant & Cafe",
+      "retention_policy_id": "alfanar-barsha-menu",
+      "method": "Public official page checked on 5 November 2026; selected facts only. Timestamp records review date, not exact retrieval time. No dated availability established.",
+      "max_age_days": 30
+    },
+    {
+      "id": "ev-museum-tariffs",
+      "source_id": "museum-tariffs",
+      "url": "https://dlp.dubai.gov.ae/Legislation%20Reference/2024/Administrative%20Resolution%20No.%20%28256%29%20of%202024%20Approving%20Ticket%20Prices%20for%20the%20Etihad%20%26%20Shindagha%20Museum.html",
+      "local_record_id": null,
+      "retrieved_at": "2026-11-05T00:00:00Z",
+      "source_updated_at": null,
+      "applicable_from": null,
+      "applicable_to": null,
+      "dataset_version": "2026-11-15.2",
+      "quality": "known",
+      "attribution": "Dubai Culture / Dubai Legislation Portal",
+      "retention_policy_id": "museum-tariffs",
+      "method": "Public official page checked on 5 November 2026; selected facts only. Timestamp records review date, not exact retrieval time. No dated availability established.",
+      "max_age_days": 30
+    },
+    {
+      "id": "ev-shindagha-visit",
+      "source_id": "shindagha-visit",
+      "url": "https://experiences.visitdubai.com/productDetail/84101",
+      "local_record_id": null,
+      "retrieved_at": "2026-11-05T00:00:00Z",
+      "source_updated_at": null,
+      "applicable_from": null,
+      "applicable_to": null,
+      "dataset_version": "2026-11-15.2",
+      "quality": "known",
+      "attribution": "Al Shindagha Museum via Visit Dubai Experiences",
+      "retention_policy_id": "shindagha-visit",
+      "method": "Public official page checked on 5 November 2026; selected facts only. Timestamp records review date, not exact retrieval time. No dated availability established.",
+      "max_age_days": 30
+    },
+    {
+      "id": "ev-jumeirah-mosque",
+      "source_id": "jumeirah-mosque",
+      "url": "https://www.jumeirahmosque.ae/mosque-visit-public/",
+      "local_record_id": null,
+      "retrieved_at": "2026-11-15T00:00:00Z",
+      "source_updated_at": null,
+      "applicable_from": null,
+      "applicable_to": null,
+      "dataset_version": "2026-11-15.2",
+      "quality": "known",
+      "attribution": "Jumeirah Mosque / SMCCU",
+      "retention_policy_id": "jumeirah-mosque",
+      "method": "Official page directly rechecked 15 November 2026; selected facts unchanged. Review-day timestamp, not exact fetch time; no live inventory.",
+      "max_age_days": 30
+    },
+    {
+      "id": "ev-rove-marina-room",
+      "source_id": "rove-marina-room",
+      "url": "https://www.rovehotels.com/en/hotels/rove-dubai-marina/",
+      "local_record_id": null,
+      "retrieved_at": "2026-11-05T00:00:00Z",
+      "source_updated_at": null,
+      "applicable_from": null,
+      "applicable_to": null,
+      "dataset_version": "2026-11-15.2",
+      "quality": "known",
+      "attribution": "Rove Hotels",
+      "retention_policy_id": "rove-marina-room",
+      "method": "Public official page checked on 5 November 2026; selected facts only. Timestamp records review date, not exact retrieval time. No dated availability established.",
+      "max_age_days": 30
+    },
+    {
+      "id": "ev-kite-public-entry",
+      "source_id": "kite-public-entry",
+      "url": "https://solemio.ae/kite-beach/",
+      "local_record_id": null,
+      "retrieved_at": "2026-11-15T00:00:00Z",
+      "source_updated_at": null,
+      "applicable_from": null,
+      "applicable_to": null,
+      "dataset_version": "2026-11-15.2",
+      "quality": "known",
+      "attribution": "Sole Mio (Kite Beach operator)",
+      "retention_policy_id": "kite-public-entry",
+      "method": "Official/operator page directly checked 15 November 2026. Timestamp denotes review day. Selected facts only; not live availability or a future-date guarantee.",
+      "max_age_days": 30
+    },
+    {
+      "id": "ev-alseef-public-entry",
+      "source_id": "alseef-public-entry",
+      "url": "https://www.emirates.com/uk/english/dubai-experience/activities/1025/al-se/",
+      "local_record_id": null,
+      "retrieved_at": "2026-11-15T00:00:00Z",
+      "source_updated_at": null,
+      "applicable_from": null,
+      "applicable_to": null,
+      "dataset_version": "2026-11-15.2",
+      "quality": "known",
+      "attribution": "Emirates Dubai Experience",
+      "retention_policy_id": "alseef-public-entry",
+      "method": "Official/operator page directly checked 15 November 2026. Timestamp denotes review day. Selected facts only; not live availability or a future-date guarantee.",
+      "max_age_days": 30
+    },
+    {
+      "id": "ev-mall-hours",
+      "source_id": "mall-hours",
+      "url": "https://www.thedubaimall.com/en/plan-your-visit/opening-hours",
+      "local_record_id": null,
+      "retrieved_at": "2026-11-15T00:00:00Z",
+      "source_updated_at": null,
+      "applicable_from": null,
+      "applicable_to": null,
+      "dataset_version": "2026-11-15.2",
+      "quality": "known",
+      "attribution": "Emaar / Dubai Mall",
+      "retention_policy_id": "mall-hours",
+      "method": "Official/operator page directly checked 15 November 2026. Timestamp denotes review day. Selected facts only; not live availability or a future-date guarantee.",
+      "max_age_days": 30
+    },
+    {
+      "id": "ev-rove-jbr-room",
+      "source_id": "rove-jbr-room",
+      "url": "https://www.rovehotels.com/en/hotels/rove-jbr/",
+      "local_record_id": null,
+      "retrieved_at": "2026-11-15T00:00:00Z",
+      "source_updated_at": null,
+      "applicable_from": null,
+      "applicable_to": null,
+      "dataset_version": "2026-11-15.2",
+      "quality": "known",
+      "attribution": "Rove Hotels",
+      "retention_policy_id": "rove-jbr-room",
+      "method": "Official/operator page directly checked 15 November 2026. Timestamp denotes review day. Selected facts only; not live availability or a future-date guarantee.",
+      "max_age_days": 30
+    },
+    {
+      "id": "ev-rove-la-mer-room",
+      "source_id": "rove-la-mer-room",
+      "url": "https://www.rovehotels.com/en/hotels/rove-la-mer-beach/",
+      "local_record_id": null,
+      "retrieved_at": "2026-11-15T00:00:00Z",
+      "source_updated_at": null,
+      "applicable_from": null,
+      "applicable_to": null,
+      "dataset_version": "2026-11-15.2",
+      "quality": "known",
+      "attribution": "Rove Hotels",
+      "retention_policy_id": "rove-la-mer-room",
+      "method": "Official/operator page directly checked 15 November 2026. Timestamp denotes review day. Selected facts only; not live availability or a future-date guarantee.",
+      "max_age_days": 30
+    },
+    {
+      "id": "ev-fostay-marina-20261115",
+      "source_id": "fostay-marina-20261115",
+      "url": "https://fostay.com/hotels/lpcdd85",
+      "local_record_id": null,
+      "retrieved_at": "2026-11-15T00:00:00Z",
+      "source_updated_at": null,
+      "applicable_from": "2026-11-20",
+      "applicable_to": "2026-11-22",
+      "dataset_version": "2026-11-15.2",
+      "quality": "known",
+      "attribution": "Fostay live-rate response, Rove Dubai Marina",
+      "retention_policy_id": "fostay-marina-20261115",
+      "method": "Read-only POST https://fostay.com/api/mcp tools/call get_live_rates: hotel_id=lpcdd85, checkin=2026-11-20, checkout=2026-11-23, adults=1, children=[], currency=AED. Response: 3 nights, Rover Room Marina View; all taxes/fees included, collected_by_hotel_at_checkin=0. Review-day timestamp, not exact fetch time. Observed quote only, no reserved inventory; recheck before booking.",
+      "max_age_days": 1
+    },
+    {
+      "id": "ev-phase2-assumptions",
+      "source_id": "phase2-assumptions",
+      "url": "docs/phase2-example.md",
+      "local_record_id": null,
+      "retrieved_at": "2026-11-15T00:00:00Z",
+      "source_updated_at": null,
+      "applicable_from": null,
+      "applicable_to": null,
+      "dataset_version": "2026-11-15.2",
+      "quality": "estimated",
+      "attribution": "Project planning estimates",
+      "retention_policy_id": "phase2-assumptions",
+      "method": "Explicit opt-in planning allowances, not supplier quotes. Meal: AED 30-80 per person per meal including fees. Ticket allowance: published base to base*1.05+10, covering a provisional VAT/fee reserve. Road timing: ceil(OSRM seconds/60)+10 to twice that value+10, including access, waiting and traffic allowance. Taxi spending allowance per traveler: ceil(km*2.5+15) to ceil(km*4+35), inclusive of a provisional toll/fee reserve. None is a guaranteed maximum. Recurring opening schedules projected ONLY onto 20-23 November 2026; exceptions require reconfirmation.",
+      "max_age_days": 7
+    },
+    {
+      "id": "ev-osrm-nov15",
+      "source_id": "osrm-nov15",
+      "url": "https://router.project-osrm.org/table/v1/driving/55.145,25.081;55.301,25.235;55.29,25.269;55.279,25.198;55.309,25.265?annotations=duration,distance&generate_hints=false",
+      "local_record_id": null,
+      "retrieved_at": "2026-11-15T00:00:00Z",
+      "source_updated_at": null,
+      "applicable_from": null,
+      "applicable_to": null,
+      "dataset_version": "2026-11-15.2",
+      "quality": "estimated",
+      "attribution": "OpenStreetMap contributors / OSRM / FOSSGIS",
+      "retention_policy_id": "osrm-nov15",
+      "method": "Public driving table fetched 15 November 2026; code Ok for all 25 cells, no fallback cells. Five approximate catalog coordinates; snapped distances 18.895,46.600,34.167,22.850,3.397 metres. Road connectivity between snapped points supports a taxi estimate, not exact hotel/entrance access, traffic, dispatch or accessibility. OSM data: https://www.openstreetmap.org/copyright ; ODbL https://opendatacommons.org/licenses/odbl/1-0/ . Tiny educational snapshot, no runtime API dependency.",
+      "max_age_days": 7
+    },
+    {
+      "id": "ev-alseef-hours",
+      "source_id": "alseef-hours",
+      "url": "https://soukalseef.ae/en/plan-your-visit",
+      "local_record_id": null,
+      "retrieved_at": "2026-11-15T00:00:00Z",
+      "source_updated_at": null,
+      "applicable_from": null,
+      "applicable_to": null,
+      "dataset_version": "2026-11-15.2",
+      "quality": "known",
+      "attribution": "Dubai Holding / Souk Al Seef",
+      "retention_policy_id": "alseef-hours",
+      "method": "Operator retail hours checked 15 November 2026: Mon-Thu 10:00-22:00, Fri-Sun 10:00-23:00. Use these conservative visiting hours, not a claim of unrestricted 24-hour access.",
+      "max_age_days": 7
+    },
+    {
+      "id": "ev-mall-free",
+      "source_id": "mall-free",
+      "url": "https://www.emirates.com/de/english/dubai-experience/activities/964/the-dubai-mal/",
+      "local_record_id": null,
+      "retrieved_at": "2026-11-15T00:00:00Z",
+      "source_updated_at": null,
+      "applicable_from": null,
+      "applicable_to": null,
+      "dataset_version": "2026-11-15.2",
+      "quality": "known",
+      "attribution": "Emirates Dubai Experience",
+      "retention_policy_id": "mall-free",
+      "method": "Emirates lists Dubai Mall as a free activity. Browsing only; purchases, parking, food and separately ticketed attractions excluded.",
+      "max_age_days": 7
+    },
+    {
+      "id": "ev-shindagha-hours-brochure",
+      "source_id": "shindagha-hours-brochure",
+      "url": "https://alshindagha.dubaiculture.gov.ae/Documents/ASM-Brochure-English.pdf",
+      "local_record_id": null,
+      "retrieved_at": "2026-11-15T00:00:00Z",
+      "source_updated_at": null,
+      "applicable_from": null,
+      "applicable_to": null,
+      "dataset_version": "2026-11-15.2",
+      "quality": "known",
+      "attribution": "Dubai Culture / Al Shindagha Museum",
+      "retention_policy_id": "shindagha-hours-brochure",
+      "method": "Official brochure's indexed Plan Your Visit section checked 15 November 2026: daily 10:00-20:00. Direct PDF retrieval timed out; only indexed atomic opening fact retained, no brochure copied. Special-date exceptions unconfirmed.",
+      "max_age_days": 7
+    }
+  ],
+  "freshness_warnings": [
+    "ev-rove-offer",
+    "ev-fostay-marina-20261115"
+  ],
+  "revisions": 0,
+  "validation_complete": true,
+  "metrics": {
+    "dataset_version": "2026-11-15.2",
+    "candidates": 20,
+    "model_calls": 0,
+    "travel_api_calls": 0
+  }
+}

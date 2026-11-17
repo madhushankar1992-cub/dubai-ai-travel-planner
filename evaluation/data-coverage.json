@@ -1,0 +1,300 @@
+{
+  "dataset_version": "2026-11-15.2",
+  "on_date": "2026-11-20",
+  "scope": "Catalog inventory only; price product, party eligibility and travel-date checks still required.",
+  "summary": {
+    "places": 27,
+    "visit_candidates": 21,
+    "candidates_with_bounded_prices": 10,
+    "candidates_with_published_hours": 5,
+    "candidates_with_dated_windows": 4,
+    "accommodation_with_occupancy": 3,
+    "routes": 54,
+    "routes_with_feasibility_evidence": 20
+  },
+  "places": [
+    {
+      "id": "al-fahidi",
+      "category": "attraction",
+      "coordinates": "approximate",
+      "published_hours": false,
+      "dated_opening_windows": 0,
+      "bounded_price_records": 0,
+      "fee_inclusive_price_records": 0,
+      "accessibility_verified": false
+    },
+    {
+      "id": "al-seef",
+      "category": "attraction",
+      "coordinates": "approximate",
+      "published_hours": true,
+      "dated_opening_windows": 1,
+      "bounded_price_records": 1,
+      "fee_inclusive_price_records": 1,
+      "accessibility_verified": false
+    },
+    {
+      "id": "gold-souk",
+      "category": "attraction",
+      "coordinates": "approximate",
+      "published_hours": false,
+      "dated_opening_windows": 0,
+      "bounded_price_records": 0,
+      "fee_inclusive_price_records": 0,
+      "accessibility_verified": false
+    },
+    {
+      "id": "textile-souk",
+      "category": "attraction",
+      "coordinates": "approximate",
+      "published_hours": false,
+      "dated_opening_windows": 0,
+      "bounded_price_records": 0,
+      "fee_inclusive_price_records": 0,
+      "accessibility_verified": false
+    },
+    {
+      "id": "kite-beach",
+      "category": "attraction",
+      "coordinates": "approximate",
+      "published_hours": false,
+      "dated_opening_windows": 0,
+      "bounded_price_records": 1,
+      "fee_inclusive_price_records": 1,
+      "accessibility_verified": false
+    },
+    {
+      "id": "jbr-beach",
+      "category": "attraction",
+      "coordinates": "approximate",
+      "published_hours": false,
+      "dated_opening_windows": 0,
+      "bounded_price_records": 0,
+      "fee_inclusive_price_records": 0,
+      "accessibility_verified": false
+    },
+    {
+      "id": "marina-walk",
+      "category": "attraction",
+      "coordinates": "approximate",
+      "published_hours": false,
+      "dated_opening_windows": 0,
+      "bounded_price_records": 0,
+      "fee_inclusive_price_records": 0,
+      "accessibility_verified": false
+    },
+    {
+      "id": "dubai-mall",
+      "category": "attraction",
+      "coordinates": "approximate",
+      "published_hours": true,
+      "dated_opening_windows": 1,
+      "bounded_price_records": 1,
+      "fee_inclusive_price_records": 1,
+      "accessibility_verified": false
+    },
+    {
+      "id": "dubai-frame",
+      "category": "attraction",
+      "coordinates": "approximate",
+      "published_hours": true,
+      "dated_opening_windows": 1,
+      "bounded_price_records": 4,
+      "fee_inclusive_price_records": 2,
+      "accessibility_verified": false
+    },
+    {
+      "id": "alserkal",
+      "category": "attraction",
+      "coordinates": "approximate",
+      "published_hours": false,
+      "dated_opening_windows": 0,
+      "bounded_price_records": 1,
+      "fee_inclusive_price_records": 1,
+      "accessibility_verified": false
+    },
+    {
+      "id": "shindagha",
+      "category": "attraction",
+      "coordinates": "approximate",
+      "published_hours": true,
+      "dated_opening_windows": 1,
+      "bounded_price_records": 2,
+      "fee_inclusive_price_records": 1,
+      "accessibility_verified": false
+    },
+    {
+      "id": "mbr-library",
+      "category": "attraction",
+      "coordinates": "approximate",
+      "published_hours": false,
+      "dated_opening_windows": 0,
+      "bounded_price_records": 0,
+      "fee_inclusive_price_records": 0,
+      "accessibility_verified": false
+    },
+    {
+      "id": "arabian-tea-house",
+      "category": "restaurant",
+      "coordinates": "approximate",
+      "published_hours": false,
+      "dated_opening_windows": 0,
+      "bounded_price_records": 0,
+      "fee_inclusive_price_records": 0,
+      "accessibility_verified": false
+    },
+    {
+      "id": "al-ustad",
+      "category": "restaurant",
+      "coordinates": "approximate",
+      "published_hours": false,
+      "dated_opening_windows": 0,
+      "bounded_price_records": 0,
+      "fee_inclusive_price_records": 0,
+      "accessibility_verified": false
+    },
+    {
+      "id": "al-khayma",
+      "category": "restaurant",
+      "coordinates": "approximate",
+      "published_hours": false,
+      "dated_opening_windows": 0,
+      "bounded_price_records": 0,
+      "fee_inclusive_price_records": 0,
+      "accessibility_verified": false
+    },
+    {
+      "id": "ravi-satwa",
+      "category": "restaurant",
+      "coordinates": "approximate",
+      "published_hours": false,
+      "dated_opening_windows": 0,
+      "bounded_price_records": 1,
+      "fee_inclusive_price_records": 0,
+      "accessibility_verified": false
+    },
+    {
+      "id": "bu-qtair",
+      "category": "restaurant",
+      "coordinates": "approximate",
+      "published_hours": false,
+      "dated_opening_windows": 0,
+      "bounded_price_records": 0,
+      "fee_inclusive_price_records": 0,
+      "accessibility_verified": false
+    },
+    {
+      "id": "al-fanar",
+      "category": "restaurant",
+      "coordinates": "approximate",
+      "published_hours": false,
+      "dated_opening_windows": 0,
+      "bounded_price_records": 0,
+      "fee_inclusive_price_records": 0,
+      "accessibility_verified": false
+    },
+    {
+      "id": "alfanar-barsha",
+      "category": "restaurant",
+      "coordinates": "missing",
+      "published_hours": false,
+      "dated_opening_windows": 0,
+      "bounded_price_records": 1,
+      "fee_inclusive_price_records": 0,
+      "accessibility_verified": false
+    },
+    {
+      "id": "etihad-museum",
+      "category": "attraction",
+      "coordinates": "missing",
+      "published_hours": false,
+      "dated_opening_windows": 0,
+      "bounded_price_records": 1,
+      "fee_inclusive_price_records": 0,
+      "accessibility_verified": false
+    },
+    {
+      "id": "jumeirah-mosque",
+      "category": "attraction",
+      "coordinates": "missing",
+      "published_hours": true,
+      "dated_opening_windows": 0,
+      "bounded_price_records": 1,
+      "fee_inclusive_price_records": 0,
+      "accessibility_verified": false
+    }
+  ],
+  "missing": {
+    "bounded_prices": [
+      "al-fahidi",
+      "gold-souk",
+      "textile-souk",
+      "jbr-beach",
+      "marina-walk",
+      "mbr-library",
+      "arabian-tea-house",
+      "al-ustad",
+      "al-khayma",
+      "bu-qtair",
+      "al-fanar"
+    ],
+    "published_hours": [
+      "al-fahidi",
+      "gold-souk",
+      "textile-souk",
+      "kite-beach",
+      "jbr-beach",
+      "marina-walk",
+      "alserkal",
+      "mbr-library",
+      "arabian-tea-house",
+      "al-ustad",
+      "al-khayma",
+      "ravi-satwa",
+      "bu-qtair",
+      "al-fanar",
+      "alfanar-barsha",
+      "etihad-museum"
+    ],
+    "dated_windows": [
+      "al-fahidi",
+      "gold-souk",
+      "textile-souk",
+      "kite-beach",
+      "jbr-beach",
+      "marina-walk",
+      "alserkal",
+      "mbr-library",
+      "arabian-tea-house",
+      "al-ustad",
+      "al-khayma",
+      "ravi-satwa",
+      "bu-qtair",
+      "al-fanar",
+      "alfanar-barsha",
+      "etihad-museum",
+      "jumeirah-mosque"
+    ],
+    "accommodation_occupancy": [
+      "stay-bur-dubai",
+      "stay-deira",
+      "stay-al-barsha",
+      "stay-downtown",
+      "stay-jumeirah",
+      "stay-dubai-marina",
+      "rove-marina-quote-flex",
+      "rove-marina-quote-nonrefund"
+    ],
+    "bounded_accommodation_quotes": [
+      "stay-bur-dubai",
+      "stay-deira",
+      "stay-al-barsha",
+      "stay-downtown",
+      "stay-jumeirah",
+      "stay-dubai-marina",
+      "rove-marina",
+      "rove-jbr",
+      "rove-la-mer"
+    ]
+  }
+}
