@@ -33,7 +33,7 @@ class MockProviders:
         )
         stage = data.get("task", "extract")
         self.calls.append((stage, url, payload))
-        assert 0 < timeout <= 45
+        assert 0 < timeout <= 90
         assert "test-groq-secret" not in json.dumps(payload)
         assert "test-gemini-secret" not in json.dumps(payload)
         if self.fail == stage:

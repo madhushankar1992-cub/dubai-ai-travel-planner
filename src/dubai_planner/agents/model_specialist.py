@@ -242,11 +242,18 @@ class ModelSpecialist:
             data["budget"] = budget.model_dump(mode="json", exclude={"lines"})
             alternative_required = budget.compliance in {"over_budget", "at_risk"}
             data["alternative_required"] = alternative_required
-            data["accommodation"] = [compact(a) for a in catalog.accommodation]
-            stay_ids = {a.id for a in catalog.accommodation}
-            data["accommodation_prices"] = [
-                p.model_dump(mode="json") for p in catalog.prices if p.entity_id in stay_ids
-            ]
+            # Hotel records are only useful when an alternative must be ranked. Omitting
+            # them otherwise keeps the request small enough to stay inside Groq's
+            # per-minute token limits (a 429 here previously stalled the whole run).
+            if alternative_required:
+                data["accommodation"] = [compact(a) for a in catalog.accommodation]
+                stay_ids = {a.id for a in catalog.accommodation}
+                data["accommodation_prices"] = [
+                    p.model_dump(mode="json") for p in catalog.prices if p.entity_id in stay_ids
+                ]
+            else:
+                data["accommodation"] = []
+                data["accommodation_prices"] = []
 
             def validate(output):
                 if not alternative_required and (output.alternative_accommodation_ids):

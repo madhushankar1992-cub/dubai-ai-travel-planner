@@ -2,7 +2,6 @@
 
 import json
 import re
-from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
 from threading import Lock
 from time import monotonic, sleep
@@ -29,13 +28,12 @@ def post_json(url, headers, payload, timeout):
     if not (
         url == "https://api.groq.com/openai/v1/chat/completions"
         or url.startswith("https://generativelanguage.googleapis.com/v1beta/models/")
-        or url in {"https://ollama.com/api/chat", "http://127.0.0.1:11434/api/chat"}
     ):
         raise ModelFailure("host_rejected")
     body = json.dumps(payload).encode()
     opener = build_opener(NoRedirect(), ProxyHandler({}))
     last_error = None
-    for attempt in range(3):
+    for attempt in range(4):
         try:
             with opener.open(
                 Request(url, data=body, headers=headers, method="POST"), timeout=timeout
@@ -45,7 +43,7 @@ def post_json(url, headers, payload, timeout):
                 raise ModelFailure("response_too_large")
             return json.loads(raw)
         except HTTPError as exc:
-            if exc.code == 429 and attempt < 2:
+            if exc.code == 429 and attempt < 3:
                 value = exc.headers.get("Retry-After", "")
                 if not value:
                     value = exc.headers.get("x-ratelimit-reset-tokens", "")
@@ -53,7 +51,7 @@ def post_json(url, headers, payload, timeout):
                 delay = min(float(match.group()) + 0.5, 45.0) if match else 10.0 * (attempt + 1)
                 sleep(delay)
                 continue
-            if exc.code in {500, 502, 503, 504} and attempt < 2:
+            if exc.code in {500, 502, 503, 504} and attempt < 3:
                 sleep(1.0 * (2**attempt))
                 continue
             last_error = exc
@@ -97,26 +95,31 @@ def post_json(url, headers, payload, timeout):
     raise ModelFailure(code) from None
 
 
+def clip_summary(text, schema_json):
+    """Trim an over-long free-text ``summary``; every other field stays strictly validated.
+
+    The summary is non-authoritative display prose. Rejecting an otherwise valid answer
+    because the model wrote a few characters too many wasted a repair attempt and could
+    fail the whole run.
+    """
+    limit = schema_json.get("properties", {}).get("summary", {}).get("maxLength")
+    if not isinstance(limit, int) or limit < 2:
+        return text
+    try:
+        data = json.loads(text)
+    except ValueError:
+        return text
+    summary = data.get("summary") if isinstance(data, dict) else None
+    if isinstance(summary, str) and len(summary) > limit:
+        data["summary"] = summary[: limit - 1].rstrip() + "…"
+        return json.dumps(data, ensure_ascii=False)
+    return text
+
+
 class ModelGateway:
     def __init__(self, settings, context, *, transport=post_json):
-        ollama_configured = settings.ollama_base_url.startswith("http://127.0.0.1") or bool(
-            settings.ollama_api_key or settings.ollama_api_key_secondary
-        )
-        if settings.model_routing == "ollama-primary":
-            configured = ollama_configured
-        elif settings.model_routing == "parallel-ensemble":
-            configured = bool(
-                settings.groq_api_key and settings.gemini_api_key and ollama_configured
-            )
-        else:
-            configured = bool(settings.groq_api_key and settings.gemini_api_key)
-        if not configured:
-            code = (
-                "missing_OLLAMA_API_KEY"
-                if settings.model_routing == "ollama-primary"
-                else "missing_GROQ_API_KEY_or_review_provider_key"
-            )
-            raise ModelFailure(code)
+        if not (settings.groq_api_key and settings.gemini_api_key):
+            raise ModelFailure("missing_GROQ_API_KEY_or_GEMINI_API_KEY")
         self.settings, self.context, self.transport = settings, context, transport
         self.lock = Lock()
         self.calls = self.tokens = self.reserved = self.latency_ms = 0
@@ -124,11 +127,7 @@ class ModelGateway:
         self.provider_calls = {}
         self.provider_failures = {}
         self.validation_failures = []
-        self.review_fallbacks = 0
         self.review_provider = ""
-        self.ensemble_roles = 0
-        self.ensemble_disagreements = 0
-        self.ensemble_partial = 0
 
     def check(self):
         if self.context.cancelled.is_set():
@@ -146,12 +145,7 @@ class ModelGateway:
                 "model_latency_ms": self.latency_ms,
                 "groq_model": self.settings.groq_model,
                 "gemini_model": self.settings.gemini_model,
-                "ollama_model": self.settings.ollama_model,
-                "review_fallbacks": self.review_fallbacks,
                 "review_provider": self.review_provider,
-                "ensemble_roles": self.ensemble_roles,
-                "ensemble_disagreements": self.ensemble_disagreements,
-                "ensemble_partial": self.ensemble_partial,
                 "prompt_version": PROMPT_VERSION,
                 "model_output_tokens": self.settings.model_output_tokens,
                 "model_sampling": "provider-default",
@@ -173,89 +167,22 @@ class ModelGateway:
             }
 
     def generate(self, role, prompt, data, schema, *, validate=lambda output: output):
-        if self.settings.model_routing == "parallel-ensemble":
-            return self._generate_parallel(role, prompt, data, schema, validate=validate)
-        if self.settings.model_routing == "ollama-primary":
-            providers = ["ollama"]
-            if role == "reviewer" and self.settings.gemini_api_key:
-                providers.append("gemini")
-            if self.settings.groq_api_key:
-                providers.append("groq")
-        else:
-            providers = ["groq"]
-            if self.settings.ollama_base_url.startswith("http://127.0.0.1"):
-                providers.append("ollama")
-        if role == "reviewer" and self.settings.model_routing == "groq-gemini":
-            providers = ["gemini"]
-            if self.settings.ollama_base_url.startswith("http://127.0.0.1"):
-                providers.append("ollama")
-        last_failure = None
-        for index, provider in enumerate(providers):
-            try:
-                result = self._generate_provider(
-                    provider, role, prompt, data, schema, validate=validate
-                )
-                if role == "reviewer":
-                    with self.lock:
-                        self.review_provider = provider
-                return result
-            except ModelFailure as exc:
-                last_failure = exc
-                with self.lock:
-                    key = (provider, exc.code)
-                    self.provider_failures[key] = self.provider_failures.get(key, 0) + 1
-                terminal = {"cancelled", "deadline", "call_limit", "token_limit"}
-                if index + 1 >= len(providers) or exc.code in terminal:
-                    raise
-                with self.lock:
-                    self.review_fallbacks += 1
-        raise last_failure
-
-    def _generate_parallel(self, role, prompt, data, schema, *, validate=lambda output: output):
-        providers = ["gemini", "ollama"] if role == "reviewer" else ["groq", "ollama"]
-        results = {}
-        failures = []
-        with ThreadPoolExecutor(max_workers=2, thread_name_prefix="model-ensemble") as pool:
-            futures = {
-                pool.submit(
-                    self._generate_provider,
-                    provider,
-                    role,
-                    prompt,
-                    data,
-                    schema,
-                    validate=validate,
-                ): provider
-                for provider in providers
-            }
-            for future in as_completed(futures):
-                provider = futures[future]
-                try:
-                    results[provider] = future.result()
-                except ModelFailure as exc:
-                    failures.append(exc)
-                    with self.lock:
-                        key = (provider, exc.code)
-                        self.provider_failures[key] = self.provider_failures.get(key, 0) + 1
-        if not results:
-            raise failures[0]
-        preferred = providers[0] if providers[0] in results else next(iter(results))
-        decisions = []
-        for output in results.values():
-            decision = output.model_dump(mode="json")
-            decision.pop("summary", None)
-            decisions.append(decision)
-        with self.lock:
-            self.ensemble_roles += 1
-            if len(results) < len(providers):
-                self.ensemble_partial += 1
-            elif decisions[0] != decisions[1]:
-                self.ensemble_disagreements += 1
-            if role == "reviewer":
-                self.review_provider = "+".join(
-                    provider for provider in providers if provider in results
-                )
-        return results[preferred]
+        # Groq runs every agent except Review; Gemini runs Review. There is no fallback
+        # provider: a failure is reported rather than silently routed elsewhere.
+        provider = "gemini" if role == "reviewer" else "groq"
+        try:
+            result = self._generate_provider(
+                provider, role, prompt, data, schema, validate=validate
+            )
+        except ModelFailure as exc:
+            with self.lock:
+                key = (provider, exc.code)
+                self.provider_failures[key] = self.provider_failures.get(key, 0) + 1
+            raise
+        if role == "reviewer":
+            with self.lock:
+                self.review_provider = provider
+        return result
 
     def _generate_provider(
         self, provider, role, prompt, data, schema, *, validate=lambda output: output
@@ -325,25 +252,6 @@ class ModelGateway:
                         "Content-Type": "application/json",
                         "User-Agent": "dubai-planner/1.0",
                     }
-                else:
-                    payload = {
-                        "model": self.settings.ollama_model,
-                        "messages": [
-                            {"role": "system", "content": system},
-                            {"role": "user", "content": user},
-                        ],
-                        "stream": False,
-                        "think": False,
-                        "options": {"temperature": 0, "num_predict": output_tokens},
-                    }
-                    url = self.settings.ollama_base_url + "/chat"
-                    headers = {
-                        "Content-Type": "application/json",
-                        "User-Agent": "dubai-planner/1.0",
-                    }
-                    key = self.settings.ollama_api_key or self.settings.ollama_api_key_secondary
-                    if key:
-                        headers["Authorization"] = "Bearer " + key.get_secret_value()
                 response = self.transport(url, headers, payload, timeout)
                 self.check()
                 if provider == "groq":
@@ -362,24 +270,13 @@ class ModelGateway:
                         if not p.get("thought")
                     )
                     reported = response.get("usageMetadata", {}).get("totalTokenCount")
-                else:
-                    if not response.get("done") or response.get("done_reason") != "stop":
-                        raise ModelFailure("incomplete_response")
-                    text = response["message"]["content"]
-                    prompt_tokens = response.get("prompt_eval_count", 0)
-                    completion_tokens = response.get("eval_count", 0)
-                    reported = (
-                        prompt_tokens + completion_tokens
-                        if type(prompt_tokens) is int and type(completion_tokens) is int
-                        else None
-                    )
                 if type(reported) is int and reported > 0:
                     usage = reported
                 if usage > reserve:
                     raise ModelFailure("token_limit")
                 if not isinstance(text, str) or len(text.encode()) > 100_000:
                     raise ModelFailure("invalid_provider_response")
-                parsed = schema.model_validate_json(text)
+                parsed = schema.model_validate_json(clip_summary(text, schema_json))
                 return validate(parsed)
             except ModelFailure:
                 raise

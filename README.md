@@ -41,12 +41,11 @@ continues to require `--env-file .env`; it never executes shell content.
 
 ## Streamlit Community Cloud deployment
 
-The same repository supports two safe model configurations:
-
-- **Local/private:** retain `.env` with `MODEL_ROUTING=parallel-ensemble` to use
-  Groq plus local Ollama for planning and Gemini plus local Ollama for review.
-- **Streamlit Community Cloud:** use `MODEL_ROUTING=groq-gemini`. Community Cloud
-  cannot reach an Ollama server running on a personal computer.
+Model routing is the same locally and in the cloud (`MODEL_ROUTING=groq-gemini`): Groq runs the
+orchestrator, destination research, logistics, planner, scheduler and budget agents, and Gemini runs
+the review agent. There is no other model provider and no silent fallback; a provider failure is
+reported. Groq's free tier rate-limits (HTTP 429), so the gateway retries with bounded backoff and
+the defaults allow 90 s per call and 300 s per run.
 
 For Community Cloud, push this repository to GitHub and deploy `app.py`. The
 included `requirements.txt` installs the application dependencies. In the app's

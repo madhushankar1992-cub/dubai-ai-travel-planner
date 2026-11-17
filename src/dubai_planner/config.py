@@ -18,18 +18,13 @@ class Settings(BaseModel):
     llm_model: str | None = None
     groq_api_key: SecretStr | None = Field(default=None, exclude=True, repr=False)
     gemini_api_key: SecretStr | None = Field(default=None, exclude=True, repr=False)
-    ollama_api_key: SecretStr | None = Field(default=None, exclude=True, repr=False)
-    ollama_api_key_secondary: SecretStr | None = Field(default=None, exclude=True, repr=False)
-    ollama_base_url: Literal["https://ollama.com/api", "http://127.0.0.1:11434/api"] = (
-        "https://ollama.com/api"
-    )
     groq_model: str = Field(default="llama-3.1-8b-instant", pattern=r"^[a-zA-Z0-9_./-]+$")
     gemini_model: str = Field(default="gemini-3.5-flash-lite", pattern=r"^[a-zA-Z0-9_.-]+$")
-    ollama_model: str = Field(default="devstral:24b", pattern=r"^[a-zA-Z0-9_./:-]+$")
-    model_routing: Literal["groq-gemini", "ollama-primary", "parallel-ensemble"] = "groq-gemini"
+    # Groq runs every agent except Review; Gemini runs Review. No other provider exists.
+    model_routing: Literal["groq-gemini"] = "groq-gemini"
     model_output_tokens: int = Field(default=2048, ge=128, le=8192)
-    run_timeout_seconds: int = Field(default=180, gt=0)
-    model_timeout_seconds: int = Field(default=45, gt=0)
+    run_timeout_seconds: int = Field(default=300, gt=0)
+    model_timeout_seconds: int = Field(default=90, gt=0)
     provider_timeout_seconds: int = Field(default=10, gt=0)
     max_revisions: int = Field(default=2, ge=0, le=2)
     max_model_calls: int = Field(default=40, gt=0)
@@ -50,15 +45,7 @@ class Settings(BaseModel):
 
     @property
     def capabilities(self) -> dict[str, bool]:
-        ollama_available = self.ollama_base_url.startswith("http://127.0.0.1") or bool(
-            self.ollama_api_key or self.ollama_api_key_secondary
-        )
-        if self.model_routing == "ollama-primary":
-            model_runner = ollama_available
-        elif self.model_routing == "parallel-ensemble":
-            model_runner = bool(self.groq_api_key and self.gemini_api_key and ollama_available)
-        else:
-            model_runner = bool(self.groq_api_key and self.gemini_api_key)
+        model_runner = bool(self.groq_api_key and self.gemini_api_key)
         return {
             "local_data": True,
             "external_travel_data": False,

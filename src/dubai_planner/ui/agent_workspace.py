@@ -215,7 +215,6 @@ def _show_run(snapshot, store, registry, catalog):
     provider_calls = {
         "Groq": result.metrics.get("calls_provider_groq", 0),
         "Gemini": result.metrics.get("calls_provider_gemini", 0),
-        "Ollama": result.metrics.get("calls_provider_ollama", 0),
     }
     if any(provider_calls.values()):
         st.markdown("**AI provider activity**")
@@ -224,7 +223,7 @@ def _show_run(snapshot, store, registry, catalog):
             column.metric(provider, f"{calls} call{'s' if calls != 1 else ''}")
     else:
         st.info(
-            "This completed run used the offline fixture workflow. It made no Groq, Gemini, or Ollama calls. "
+            "This completed run used the offline fixture workflow. It made no Groq or Gemini calls. "
             "Choose an AI agents execution mode for live model calls."
         )
     if result.agent_summaries:
@@ -243,24 +242,12 @@ def _show_run(snapshot, store, registry, catalog):
 
 def agent_planner(repository, catalog, settings):
     st.header("LangGraph agent planner")
-    if settings.model_routing == "parallel-ensemble":
-        st.caption(
-            "Groq and Ollama run every planning role concurrently; Gemini and Ollama run Review concurrently. Every output is independently validated."
-        )
-        review_label = "Gemini + Ollama parallel Review"
-        model_label = "AI agents (parallel ensemble)"
-    elif settings.model_routing == "ollama-primary":
-        st.caption(
-            "Ollama Nemotron runs all seven agents; Groq and Gemini remain configured fallbacks. Travel facts remain local and policy-gated."
-        )
-        review_label = "Ollama Review (Gemini/Groq fallback)"
-        model_label = "AI agents (Ollama primary)"
-    else:
-        st.caption(
-            "Groq runs six planning agents; Gemini performs the review. Local Ollama is used only if a primary model fails. Travel facts remain local and policy-gated."
-        )
-        review_label = "Gemini Review (local Ollama backup)"
-        model_label = "AI agents (Groq + Gemini)"
+    st.caption(
+        "Groq runs the six planning agents; Gemini performs the review. "
+        "Travel facts remain local and policy-gated."
+    )
+    review_label = "Gemini Review"
+    model_label = "AI agents (Groq + Gemini)"
     st.info(
         "Workflow: Orchestrator → parallel Destination Research and Logistics → Planner → "
         f"Scheduler → Budget → {review_label}. Repairs return to Planner and rebuild every downstream artifact."
@@ -302,12 +289,6 @@ def agent_planner(repository, catalog, settings):
                         "accommodation": stay.id,
                         "groq_model": settings.groq_model if mode == "model" else None,
                         "gemini_model": settings.gemini_model if mode == "model" else None,
-                        "ollama_model": (
-                            settings.ollama_model
-                            if mode == "model"
-                            and settings.ollama_base_url.startswith("http://127.0.0.1")
-                            else None
-                        ),
                         "model_routing": settings.model_routing if mode == "model" else None,
                         "max_revisions": settings.max_revisions,
                     },

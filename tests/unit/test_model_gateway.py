@@ -169,146 +169,63 @@ def test_rate_limit_honors_bounded_retry_after(monkeypatch):
     assert delays == [0.6]
 
 
-def test_gemini_reviewer_falls_back_to_local_ollama_only():
+def test_groq_runs_planning_roles_and_gemini_runs_review():
     calls = []
+    review = json.dumps({"observations": [], "summary": "Review complete."})
 
     def transport(url, headers, payload, timeout):
-        calls.append((url, headers, payload))
+        calls.append(url)
         if "generativelanguage" in url:
-            raise ModelFailure("invalid_provider_request")
-        return {
-            "done": True,
-            "done_reason": "stop",
-            "message": {"content": json.dumps({"observations": [], "summary": "Review complete."})},
-            "prompt_eval_count": 40,
-            "eval_count": 10,
-        }
-
-    client = gateway(transport, ollama_base_url="http://127.0.0.1:11434/api")
-    result = client.generate("reviewer", "Review", {}, ReviewAdvice)
-    assert result.observations == []
-    assert ["generativelanguage" in call[0] for call in calls] == [True, False]
-    assert calls[1][0] == "http://127.0.0.1:11434/api/chat"
-    assert calls[1][2]["model"] == "devstral:24b"
-    assert calls[1][2]["stream"] is False
-    assert client.metrics()["review_provider"] == "ollama"
-    assert client.metrics()["review_fallbacks"] == 1
-
-
-def test_ollama_primary_routes_non_review_agents_and_keeps_fallbacks_configured():
-    calls = []
-
-    def transport(url, headers, payload, timeout):
-        calls.append((url, payload))
-        return {
-            "done": True,
-            "done_reason": "stop",
-            "message": {"content": GOOD},
-            "prompt_eval_count": 30,
-            "eval_count": 20,
-        }
-
-    client = gateway(transport, ollama_api_key="secret-ollama", model_routing="ollama-primary")
-    result = client.generate("destination", "Select", {}, Selection)
-    assert result.selected_ids == []
-    assert calls[0][0] == "https://ollama.com/api/chat"
-    assert calls[0][1]["model"] == "devstral:24b"
-    assert client.metrics()["calls_provider_ollama"] == 1
-
-
-def test_secondary_ollama_key_enables_ollama_when_primary_is_unset():
-    observed_headers = []
-
-    def transport(url, headers, payload, timeout):
-        observed_headers.append(headers)
-        return {
-            "done": True,
-            "done_reason": "stop",
-            "message": {"content": GOOD},
-            "prompt_eval_count": 30,
-            "eval_count": 20,
-        }
-
-    client = gateway(
-        transport,
-        ollama_api_key=None,
-        ollama_api_key_secondary="secondary-ollama-secret",
-        model_routing="ollama-primary",
-    )
-    assert client.generate("destination", "Select", {}, Selection).selected_ids == []
-    assert observed_headers[0]["Authorization"] == "Bearer secondary-ollama-secret"
-
-
-def test_local_ollama_uses_the_local_allowlisted_endpoint_without_an_api_key():
-    observed = []
-
-    def transport(url, headers, payload, timeout):
-        observed.append((url, headers, payload))
-        return {
-            "done": True,
-            "done_reason": "stop",
-            "message": {"content": GOOD},
-            "prompt_eval_count": 30,
-            "eval_count": 20,
-        }
-
-    client = gateway(
-        transport,
-        ollama_api_key=None,
-        ollama_base_url="http://127.0.0.1:11434/api",
-        ollama_model="qwen3:8b",
-        model_routing="ollama-primary",
-    )
-    assert client.generate("destination", "Select", {}, Selection).selected_ids == []
-    assert observed[0][0] == "http://127.0.0.1:11434/api/chat"
-    assert observed[0][1].get("Authorization") is None
-    assert observed[0][2]["model"] == "qwen3:8b"
-
-
-@pytest.mark.parametrize(
-    ("role", "schema", "content", "expected_providers"),
-    [
-        ("destination", Selection, GOOD, {"groq", "ollama"}),
-        (
-            "reviewer",
-            ReviewAdvice,
-            json.dumps({"observations": [], "summary": "Review complete."}),
-            {"gemini", "ollama"},
-        ),
-    ],
-)
-def test_parallel_ensemble_calls_both_role_providers_concurrently(
-    role, schema, content, expected_providers
-):
-    barrier = Barrier(2)
-    called = []
-
-    def transport(url, headers, payload, timeout):
-        provider = (
-            "groq" if "groq.com" in url else "gemini" if "generativelanguage" in url else "ollama"
-        )
-        called.append(provider)
-        barrier.wait(timeout=2)
-        if provider == "groq":
-            return response(content)
-        if provider == "gemini":
             return {
-                "candidates": [{"finishReason": "STOP", "content": {"parts": [{"text": content}]}}],
+                "candidates": [{"finishReason": "STOP", "content": {"parts": [{"text": review}]}}],
                 "usageMetadata": {"totalTokenCount": 50},
             }
-        return {
-            "done": True,
-            "done_reason": "stop",
-            "message": {"content": content},
-            "prompt_eval_count": 30,
-            "eval_count": 20,
-        }
+        return response(GOOD)
 
-    client = gateway(transport, ollama_api_key="secret-ollama", model_routing="parallel-ensemble")
-    client.generate(role, "Return JSON", {}, schema)
-    assert set(called) == expected_providers
-    assert client.metrics()["ensemble_roles"] == 1
-    assert client.metrics()["ensemble_partial"] == 0
+    client = gateway(transport)
+    assert client.generate("destination", "Select", {}, Selection).selected_ids == []
+    assert client.generate("reviewer", "Review", {}, ReviewAdvice).observations == []
+    assert calls[0] == "https://api.groq.com/openai/v1/chat/completions"
+    assert calls[1].startswith("https://generativelanguage.googleapis.com/v1beta/models/")
+    metrics = client.metrics()
+    assert metrics["calls_provider_groq"] == 1 and metrics["calls_provider_gemini"] == 1
+    assert metrics["review_provider"] == "gemini"
+
+
+def test_provider_failure_is_reported_without_any_fallback_provider():
+    calls = []
+
+    def transport(url, headers, payload, timeout):
+        calls.append(url)
+        raise ModelFailure("provider_server_error")
+
+    client = gateway(transport)
+    with pytest.raises(ModelFailure) as caught:
+        client.generate("reviewer", "Review", {}, ReviewAdvice)
+    assert caught.value.code == "provider_server_error"
+    assert len(calls) == 1 and "generativelanguage" in calls[0]
+    assert client.metrics()["failures_gemini_provider_server_error"] == 1
+
+
+def test_only_groq_and_gemini_hosts_are_allowlisted():
+    for url in (
+        "https://ollama.com/api/chat",
+        "http://127.0.0.1:11434/api/chat",
+        "https://example.com/v1/chat/completions",
+    ):
+        with pytest.raises(ModelFailure) as caught:
+            post_json(url, {}, {}, 1)
+        assert caught.value.code == "host_rejected"
+
+
+def test_gateway_requires_both_groq_and_gemini_keys():
+    context = RunContext(
+        "test", datetime.now(timezone.utc) + timedelta(seconds=60), Event(), "hash", "version", "v1"
+    )
+    for keys in ({"groq_api_key": "g"}, {"gemini_api_key": "g"}, {}):
+        with pytest.raises(ModelFailure) as caught:
+            ModelGateway(Settings(**keys), context, transport=lambda *a: None)
+        assert caught.value.code == "missing_GROQ_API_KEY_or_GEMINI_API_KEY"
 
 
 def test_extraction_returns_proposal_with_missing_information():
@@ -324,3 +241,18 @@ def test_extraction_returns_proposal_with_missing_information():
     assert result.request is None
     assert result.clarification_fields == ["days"]
     assert client.metrics()["calls_orchestrator"] == 1
+
+
+def test_overlong_summary_is_clipped_but_other_fields_stay_strict():
+    import json
+
+    from dubai_planner.services.llm_gateway import clip_summary
+
+    schema = {"properties": {"summary": {"maxLength": 20}}}
+    clipped = json.loads(clip_summary(json.dumps({"summary": "x" * 50, "ids": ["a"]}), schema))
+    assert len(clipped["summary"]) == 20 and clipped["summary"].endswith("…")
+    assert clipped["ids"] == ["a"]
+    short = json.dumps({"summary": "fine"})
+    assert clip_summary(short, schema) == short
+    assert clip_summary("not json", schema) == "not json"
+    assert clip_summary(short, {"properties": {}}) == short
