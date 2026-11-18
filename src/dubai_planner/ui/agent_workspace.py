@@ -15,6 +15,7 @@ from dubai_planner.services.run_service import (
     run_model,
 )
 from dubai_planner.storage.plans import PlanRepository
+from dubai_planner.ui.agent_view import agent_cards, agent_graph
 from dubai_planner.ui.workspace import show_plan
 
 ROLE_TASKS = (
@@ -197,6 +198,25 @@ def _show_extraction(catalog, settings):
             st.json(proposed.request.model_dump(mode="json"), expanded=False)
 
 
+def _render_live(registry, run_id):
+    """Green-light agent cards and the live LangGraph chart; refreshes itself while running."""
+    snapshot = registry.snapshot()
+    if snapshot is None or snapshot.run_id != run_id:
+        return
+    finished = bool(snapshot.finished_at)
+    failed = bool(snapshot.error) or bool(snapshot.result and snapshot.result.status == "failed")
+    summaries = snapshot.result.agent_summaries if snapshot.result else []
+    cards, chart = st.columns([3, 2])
+    with cards:
+        agent_cards(snapshot.events, summaries, finished=finished, failed=failed)
+    with chart:
+        agent_graph(snapshot.events, finished=finished, failed=failed)
+    flag = "agent-live-finished-" + run_id
+    if finished and not st.session_state.get(flag):
+        st.session_state[flag] = True
+        st.rerun()  # one full refresh so the finished plan appears below the live view
+
+
 def _show_run(snapshot, store, registry, catalog):
     st.subheader("Agent run")
     st.write(f"Status: **{snapshot.state.replace('_', ' ')}**")
@@ -211,23 +231,24 @@ def _show_run(snapshot, store, registry, catalog):
     if right.button("Refresh progress", key="refresh-agent-run"):
         st.rerun()
     if snapshot.events:
-        st.caption("Orchestrator → Destination + Logistics → Planner → Scheduler → Budget → Review")
-        st.dataframe(role_progress(snapshot.events), hide_index=True)
-        st.markdown("**Sanitized LangGraph timeline**")
-        st.dataframe(
-            [
-                {
-                    "#": event.sequence,
-                    "time": event.timestamp.isoformat(),
-                    "specialist/task": event.task_id or "run",
-                    "revision": event.revision,
-                    "event": event.summary,
-                    "artifacts": ", ".join(event.artifact_ids),
-                }
-                for event in snapshot.events
-            ],
-            hide_index=True,
-        )
+        st.markdown("**Agents at work**")
+        live = st.fragment(run_every=None if snapshot.finished_at else 2)(_render_live)
+        live(registry, snapshot.run_id)
+        with st.expander("LangGraph event timeline"):
+            st.dataframe(
+                [
+                    {
+                        "#": event.sequence,
+                        "time": event.timestamp.isoformat(),
+                        "specialist/task": event.task_id or "run",
+                        "revision": event.revision,
+                        "event": event.summary,
+                        "artifacts": ", ".join(event.artifact_ids),
+                    }
+                    for event in snapshot.events
+                ],
+                hide_index=True,
+            )
     if snapshot.error:
         st.error(snapshot.error)
     if not snapshot.result:

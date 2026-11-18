@@ -189,3 +189,27 @@ def test_export_policy_checked_before_model_calls(catalog, registry, now):
     with pytest.raises(ValueError):
         execute(catalog, registry, now, providers)
     assert not providers.calls
+
+
+class ShortDestination(MockProviders):
+    """Destination research that always under-selects."""
+
+    def __init__(self):
+        super().__init__()
+
+    def __call__(self, url, headers, payload, timeout):
+        response = super().__call__(url, headers, payload, timeout)
+        stage = self.calls[-1][0]
+        if stage == "research":
+            body = json.loads(response["choices"][0]["message"]["content"])
+            body["selected_ids"] = body["selected_ids"][:1]
+            response["choices"][0]["message"]["content"] = json.dumps(body)
+        return response
+
+
+def test_last_resort_guard_tops_up_and_discloses_it(catalog, registry, now):
+    result = execute(catalog, registry, now, ShortDestination())
+    guard = [line for line in result.agent_summaries if "coverage guard added" in line]
+    assert guard and guard[0].startswith("destination/")
+    assert result.status != "failed"
+    assert result.metrics["model_calls"] == 7  # no repair spent on a short answer

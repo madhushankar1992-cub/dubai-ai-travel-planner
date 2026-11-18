@@ -16,6 +16,7 @@ from dubai_planner.config import load_settings  # noqa: E402
 from dubai_planner.providers.gateway import ProviderGateway  # noqa: E402
 from dubai_planner.providers.policy import PolicyRegistry  # noqa: E402
 from dubai_planner.storage.repository import CatalogRepository  # noqa: E402
+from dubai_planner.ui.agent_view import agent_models_panel  # noqa: E402
 from dubai_planner.ui.agent_workspace import agent_planner  # noqa: E402
 from dubai_planner.ui.workspace import data_manager, saved_plans, trip_planner  # noqa: E402
 
@@ -102,6 +103,7 @@ page = st.sidebar.radio(
         "Manage travel data",
     ],
 )
+agent_models_panel(settings)
 if page != "Browse Dubai":
     {
         "Manage travel data": data_manager,

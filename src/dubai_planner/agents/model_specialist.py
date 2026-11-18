@@ -87,6 +87,18 @@ def compact(record):
     return {**{k: values[k] for k in keys if k in values}, "evidence_ids": sorted(refs(record))}
 
 
+def approved(ids, records):
+    """Selected IDs must be approved and unique; evidence comes from the records themselves.
+
+    The model's own evidence_ids are non-authoritative: citing is Python's job, so a missing
+    or mistyped citation no longer fails an otherwise valid selection.
+    """
+    by_id = {record.id: record for record in records}
+    if len(set(ids)) != len(ids) or not set(ids).issubset(by_id):
+        raise ValueError("Unapproved or duplicate IDs")
+    return [by_id[key] for key in ids]
+
+
 def cited(ids, evidence_ids, records):
     by_id = {record.id: record for record in records}
     if len(set(ids)) != len(ids) or not set(ids).issubset(by_id):
@@ -104,6 +116,15 @@ class ModelSpecialist:
         self.role, self.gateway = role, gateway
         self.summaries = []
         self.lock = Lock()
+
+    def _disclose_guard(self, context, added):
+        """Say so openly when the last-resort coverage guard (not the model) added stops."""
+        if added:
+            with self.lock:
+                self.summaries.append(
+                    f"{self.role}/{context.stage}/r{context.revision}: coverage guard added "
+                    f"{len(added)} stop(s) the model did not select: {', '.join(added)}"
+                )
 
     def execute(self, request, context):
         catalog = context.catalog
@@ -144,48 +165,57 @@ class ModelSpecialist:
             )
         if self.role == "planner":
             data["candidates"] = [compact(p) for p in context.candidates]
+            # First pass: about two stops per trip day. Later revisions may drop stops to
+            # resolve findings, so no minimum is imposed on them.
+            required_count = (
+                min(len(context.candidates), 2 * request.days) if context.revision == 0 else 0
+            )
+            data["required_count"] = required_count
 
             def validate(output):
                 if output.clarification_fields:
                     raise ValueError("Planner cannot introduce new clarification fields")
-                cited(output.selected_ids, output.evidence_ids, context.candidates)
+                approved(output.selected_ids, context.candidates)
                 if context.candidates and not output.selected_ids:
                     raise ValueError("Select supported candidates")
                 return output
 
             output = ask(Orchestration, validate)
             selected = list(output.selected_ids)
-            if context.revision == 0:
-                # First pass only: later revisions may deliberately drop stops to cut cost.
-                for place in context.candidates:
-                    if len(selected) >= min(len(context.candidates), 2 * request.days):
-                        break
-                    if place.id not in selected:
-                        selected.append(place.id)
+            added = []
+            for place in context.candidates:  # last resort after the model's repair attempt
+                if len(selected) >= required_count:
+                    break
+                if place.id not in selected:
+                    selected.append(place.id)
+                    added.append(place.name)
+            self._disclose_guard(context, added)
             return OrchestratorOutput(
                 request=request, clarification_fields=[], selected_ids=selected
             )
         if self.role == "destination":
             candidates = select_candidates(request, catalog, now=context.now)
             data["candidates"] = [compact(p) for p in candidates]
+            required_count = min(len(candidates), 2 * request.days)
+            data["required_count"] = required_count
 
             def validate(output):
-                cited(output.selected_ids, output.evidence_ids, candidates)
+                approved(output.selected_ids, candidates)
                 if candidates and not output.selected_ids:
                     raise ValueError("Return supported candidates")
                 return output
 
             output = ask(Selection, validate)
-            selected, evidence_ids = list(output.selected_ids), list(output.evidence_ids)
-            # Coverage guard: about two stops per day. Candidates are already ranked by
-            # interest match, so a short model answer is topped up deterministically.
-            for place in candidates:
-                if len(selected) >= min(len(candidates), 2 * request.days):
+            selected = list(output.selected_ids)
+            added = []
+            for place in candidates:  # last resort, ranked by interest match
+                if len(selected) >= required_count:
                     break
                 if place.id not in selected and refs(place):
                     selected.append(place.id)
-                    evidence_ids.extend(sorted(refs(place)))
-            return DestinationOutput(candidates=cited(selected, evidence_ids, candidates))
+                    added.append(place.name)
+            self._disclose_guard(context, added)
+            return DestinationOutput(candidates=approved(selected, candidates))
         if self.role == "logistics" and context.stage == "preliminary":
             stays = [
                 a
@@ -201,19 +231,13 @@ class ModelSpecialist:
             def validate(output):
                 if stays and not output.accommodation_id:
                     raise ValueError("Select allowed accommodation")
-                cited(
-                    [output.accommodation_id] if output.accommodation_id else [],
-                    output.evidence_ids,
-                    stays,
-                )
+                approved([output.accommodation_id] if output.accommodation_id else [], stays)
                 return output
 
             output = ask(AccommodationChoice, validate)
             return LogisticsOutput(
-                accommodation=cited(
-                    [output.accommodation_id] if output.accommodation_id else [],
-                    output.evidence_ids,
-                    stays,
+                accommodation=approved(
+                    [output.accommodation_id] if output.accommodation_id else [], stays
                 )
             )
         if self.role == "scheduler":
@@ -232,13 +256,13 @@ class ModelSpecialist:
             ]
 
             def validate(output):
-                cited(output.selected_ids, output.evidence_ids, context.candidates)
+                approved(output.selected_ids, context.candidates)
                 if set(output.selected_ids) != {p.id for p in context.candidates}:
                     raise ValueError("Ordering must preserve selected candidates")
                 return output
 
             output = ask(Selection, validate)
-            ordered = cited(output.selected_ids, output.evidence_ids, context.candidates)
+            ordered = approved(output.selected_ids, context.candidates)
             return LogisticsOutput(
                 accommodation=context.accommodation,
                 days=build_schedule(

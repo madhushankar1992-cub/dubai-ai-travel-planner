@@ -13,6 +13,7 @@ from dubai_planner.services.catalog_editor import COLLECTIONS, edited_catalog
 from dubai_planner.services.planner import plan_local
 from dubai_planner.storage.plans import PlanRepository
 from dubai_planner.storage.repository import ImportRejected
+from dubai_planner.ui.agent_view import show_timeline_and_map
 
 
 def data_manager(repository, catalog):
@@ -313,6 +314,8 @@ def _show_traveler_plan(result, store, *, catalog, historical):
                 st.caption(
                     f"{_display_name(catalog, leg.origin_id)} to {_display_name(catalog, leg.destination_id)} by {leg.mode}: {duration}"
                 )
+
+    show_timeline_and_map(result, catalog)
 
     guidance = {
         "OCCUPANCY_UNKNOWN": "Confirm the room is available for your group.",
