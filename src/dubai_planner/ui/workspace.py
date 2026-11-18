@@ -363,8 +363,24 @@ def trip_planner(repository, catalog):
         st.info("Add source-backed accommodation in Manage travel data before planning.")
         return
     places = {p.id: p for p in catalog.places if p.category != "area"}
+    # Places with reviewed opening windows and road routes, balanced across culture, beach and food.
     defaults = [
-        key for key in ("al-seef", "dubai-frame", "shindagha", "dubai-mall") if key in places
+        key
+        for key in (
+            "al-fahidi",
+            "al-seef",
+            "shindagha",
+            "dubai-frame",
+            "gold-souk",
+            "kite-beach",
+            "jbr-beach",
+            "marina-walk",
+            "arabian-tea-house",
+            "al-khayma",
+            "al-fanar",
+            "dubai-mall",
+        )
+        if key in places
     ]
     with st.form("trip-request"):
         start = st.date_input("First trip day", value=max(date.today(), date(2026, 11, 20)))
@@ -432,7 +448,15 @@ def trip_planner(repository, catalog):
                 price_choices={
                     p.entity_id: p.id
                     for p in catalog.prices
-                    if estimates and p.id in {"allowance-dubai-frame", "allowance-shindagha"}
+                    if estimates
+                    and p.id
+                    in {
+                        "allowance-dubai-frame",
+                        "allowance-shindagha",
+                        "price-arabian-tea-house",
+                        "price-al-khayma",
+                        "price-al-fanar",
+                    }
                 },
                 meal_allowance_price_id="price-meal-allowance"
                 if estimates and any(p.id == "price-meal-allowance" for p in catalog.prices)

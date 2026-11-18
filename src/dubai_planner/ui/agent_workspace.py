@@ -51,11 +51,23 @@ def _session_registry():
 def _request_form(catalog):
     stays = {stay.id: stay for stay in catalog.accommodation}
     places = {place.id: place for place in catalog.places if place.category != "area"}
-    # These four have reviewed hours and routes in the curated dataset, so the scheduler
-    # can place them. Places without that evidence are left for the user to opt into.
-    default_places = [
-        key for key in ("al-seef", "dubai-frame", "shindagha", "dubai-mall") if key in places
-    ]
+    # Places with reviewed opening windows and road routes in the curated dataset, balanced
+    # across culture, beach and food so a multi-day request has enough to fill each day.
+    preferred_places = (
+        "al-fahidi",
+        "al-seef",
+        "shindagha",
+        "dubai-frame",
+        "gold-souk",
+        "kite-beach",
+        "jbr-beach",
+        "marina-walk",
+        "arabian-tea-house",
+        "al-khayma",
+        "al-fanar",
+        "dubai-mall",
+    )
+    default_places = [key for key in preferred_places if key in places]
     default_date = max(date.today(), date(2026, 11, 20))
     with st.form("agent-structured-request"):
         st.subheader("Confirmed planning constraints")
@@ -128,7 +140,15 @@ def _request_form(catalog):
         price_choices={
             price.entity_id: price.id
             for price in catalog.prices
-            if estimates and price.id in {"allowance-dubai-frame", "allowance-shindagha"}
+            if estimates
+            and price.id
+            in {
+                "allowance-dubai-frame",
+                "allowance-shindagha",
+                "price-arabian-tea-house",
+                "price-al-khayma",
+                "price-al-fanar",
+            }
         },
         meal_allowance_price_id="price-meal-allowance"
         if estimates and any(price.id == "price-meal-allowance" for price in catalog.prices)

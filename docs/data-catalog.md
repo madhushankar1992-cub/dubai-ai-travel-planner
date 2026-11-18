@@ -2,6 +2,34 @@
 
 Latest selected-source review: 15 November 2026. Dataset: `2026-11-15.2`; schema: `1.0`.
 
+## Coverage expansion, 18 November 2026 (dataset `2026-11-18.1`)
+
+Schedulable places grew from 4 to 12 and OSRM-backed taxi routes from 20 to 156, so a
+multi-day request can include culture, beach and food stops. Rebuild with
+`python scripts/build_seed.py` (offline); the logic is in `scripts/expand_coverage.py` and
+the fetched road table is stored in `data/curated/osrm-table-2026-11-18.json`.
+
+| Place | Hours basis | Quality |
+| --- | --- | --- |
+| Al Fanar (Al Seef) | Official branch page: 12:00-23:00 daily | known |
+| JBR Beach | Official The Beach FAQ hours (public sand reported 24 h) | known |
+| Marina Walk | Visit Dubai: open at all hours; 08:00-22:00 planning window | known |
+| Al Fahidi, Gold Souk, Arabian Tea House, Al Khayma, Kite Beach | Third-party listings that disagree; conservative overlap used | estimated |
+
+Notes and limits:
+
+- Pages were read through search-indexed text on 18 November 2026, not direct retrieval,
+  and every record says so. Third-party hours are conservative planning windows, not
+  operator confirmations. Bu Qtair was left out (single unofficial listing).
+- Opening windows for new places cover 20-26 November 2026 only; exceptions need
+  reconfirmation. The original 20 routes keep their 15 November evidence so the historical
+  acceptance example is still reproducible; new routes cite `ev-osrm-nov18`.
+- New free-access prices (Al Fahidi, Gold Souk, JBR Beach, Marina Walk) are known and cover
+  public access only. Restaurant prices are opt-in AED 30-80 meal allowances, never quotes.
+- **Not solved:** the only hotel quote is from 15 November and expires after one day, so any
+  plan made later reports stale accommodation evidence and stays `partial`. A fresh,
+  fee-inclusive quote has to be obtained from the operator.
+
 ## Current Phase 2 acceptance
 
 The bounded four-day example and its genuine hotel alternative now pass as

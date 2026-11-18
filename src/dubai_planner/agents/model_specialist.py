@@ -154,8 +154,16 @@ class ModelSpecialist:
                 return output
 
             output = ask(Orchestration, validate)
+            selected = list(output.selected_ids)
+            if context.revision == 0:
+                # First pass only: later revisions may deliberately drop stops to cut cost.
+                for place in context.candidates:
+                    if len(selected) >= min(len(context.candidates), 2 * request.days):
+                        break
+                    if place.id not in selected:
+                        selected.append(place.id)
             return OrchestratorOutput(
-                request=request, clarification_fields=[], selected_ids=output.selected_ids
+                request=request, clarification_fields=[], selected_ids=selected
             )
         if self.role == "destination":
             candidates = select_candidates(request, catalog, now=context.now)
@@ -168,9 +176,16 @@ class ModelSpecialist:
                 return output
 
             output = ask(Selection, validate)
-            return DestinationOutput(
-                candidates=cited(output.selected_ids, output.evidence_ids, candidates)
-            )
+            selected, evidence_ids = list(output.selected_ids), list(output.evidence_ids)
+            # Coverage guard: about two stops per day. Candidates are already ranked by
+            # interest match, so a short model answer is topped up deterministically.
+            for place in candidates:
+                if len(selected) >= min(len(candidates), 2 * request.days):
+                    break
+                if place.id not in selected and refs(place):
+                    selected.append(place.id)
+                    evidence_ids.extend(sorted(refs(place)))
+            return DestinationOutput(candidates=cited(selected, evidence_ids, candidates))
         if self.role == "logistics" and context.stage == "preliminary":
             stays = [
                 a

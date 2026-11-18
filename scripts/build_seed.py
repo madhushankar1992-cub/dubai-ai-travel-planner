@@ -5,12 +5,13 @@ import math
 from pathlib import Path
 
 from enrich_seed import enrich
+from expand_coverage import expand_coverage
 from phase2_evidence import complete_example
 from review_seed import review
 from stay_quotes import add_stay_quotes
 
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = "2026-11-15.2"
+VERSION = "2026-11-18.1"
 REVIEWED = "2026-11-05T00:00:00Z"  # Review date; exact retrieval time not retained
 SOURCES = {
     "rove-offer": ("Rove Hotels", "https://www.rovehotels.com/en/offer/beach-staycation/"),
@@ -665,6 +666,7 @@ enrich(catalog, policies)
 review(catalog, policies)
 add_stay_quotes(catalog, policies)
 complete_example(catalog, policies)
+expand_coverage(catalog, policies)
 for filename, data in [
     ("data/curated/dubai-seed.json", catalog),
     ("config/provider_policies/sources.json", policies),

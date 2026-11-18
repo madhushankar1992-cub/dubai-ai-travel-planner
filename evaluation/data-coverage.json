@@ -1,26 +1,26 @@
 {
-  "dataset_version": "2026-11-15.2",
+  "dataset_version": "2026-11-18.1",
   "on_date": "2026-11-20",
   "scope": "Catalog inventory only; price product, party eligibility and travel-date checks still required.",
   "summary": {
     "places": 27,
     "visit_candidates": 21,
-    "candidates_with_bounded_prices": 10,
-    "candidates_with_published_hours": 5,
-    "candidates_with_dated_windows": 4,
+    "candidates_with_bounded_prices": 17,
+    "candidates_with_published_hours": 13,
+    "candidates_with_dated_windows": 12,
     "accommodation_with_occupancy": 3,
-    "routes": 54,
-    "routes_with_feasibility_evidence": 20
+    "routes": 190,
+    "routes_with_feasibility_evidence": 156
   },
   "places": [
     {
       "id": "al-fahidi",
       "category": "attraction",
       "coordinates": "approximate",
-      "published_hours": false,
-      "dated_opening_windows": 0,
-      "bounded_price_records": 0,
-      "fee_inclusive_price_records": 0,
+      "published_hours": true,
+      "dated_opening_windows": 1,
+      "bounded_price_records": 1,
+      "fee_inclusive_price_records": 1,
       "accessibility_verified": false
     },
     {
@@ -37,10 +37,10 @@
       "id": "gold-souk",
       "category": "attraction",
       "coordinates": "approximate",
-      "published_hours": false,
-      "dated_opening_windows": 0,
-      "bounded_price_records": 0,
-      "fee_inclusive_price_records": 0,
+      "published_hours": true,
+      "dated_opening_windows": 1,
+      "bounded_price_records": 1,
+      "fee_inclusive_price_records": 1,
       "accessibility_verified": false
     },
     {
@@ -57,8 +57,8 @@
       "id": "kite-beach",
       "category": "attraction",
       "coordinates": "approximate",
-      "published_hours": false,
-      "dated_opening_windows": 0,
+      "published_hours": true,
+      "dated_opening_windows": 1,
       "bounded_price_records": 1,
       "fee_inclusive_price_records": 1,
       "accessibility_verified": false
@@ -67,20 +67,20 @@
       "id": "jbr-beach",
       "category": "attraction",
       "coordinates": "approximate",
-      "published_hours": false,
-      "dated_opening_windows": 0,
-      "bounded_price_records": 0,
-      "fee_inclusive_price_records": 0,
+      "published_hours": true,
+      "dated_opening_windows": 1,
+      "bounded_price_records": 1,
+      "fee_inclusive_price_records": 1,
       "accessibility_verified": false
     },
     {
       "id": "marina-walk",
       "category": "attraction",
       "coordinates": "approximate",
-      "published_hours": false,
-      "dated_opening_windows": 0,
-      "bounded_price_records": 0,
-      "fee_inclusive_price_records": 0,
+      "published_hours": true,
+      "dated_opening_windows": 1,
+      "bounded_price_records": 1,
+      "fee_inclusive_price_records": 1,
       "accessibility_verified": false
     },
     {
@@ -137,10 +137,10 @@
       "id": "arabian-tea-house",
       "category": "restaurant",
       "coordinates": "approximate",
-      "published_hours": false,
-      "dated_opening_windows": 0,
-      "bounded_price_records": 0,
-      "fee_inclusive_price_records": 0,
+      "published_hours": true,
+      "dated_opening_windows": 1,
+      "bounded_price_records": 1,
+      "fee_inclusive_price_records": 1,
       "accessibility_verified": false
     },
     {
@@ -157,10 +157,10 @@
       "id": "al-khayma",
       "category": "restaurant",
       "coordinates": "approximate",
-      "published_hours": false,
-      "dated_opening_windows": 0,
-      "bounded_price_records": 0,
-      "fee_inclusive_price_records": 0,
+      "published_hours": true,
+      "dated_opening_windows": 1,
+      "bounded_price_records": 1,
+      "fee_inclusive_price_records": 1,
       "accessibility_verified": false
     },
     {
@@ -187,10 +187,10 @@
       "id": "al-fanar",
       "category": "restaurant",
       "coordinates": "approximate",
-      "published_hours": false,
-      "dated_opening_windows": 0,
-      "bounded_price_records": 0,
-      "fee_inclusive_price_records": 0,
+      "published_hours": true,
+      "dated_opening_windows": 1,
+      "bounded_price_records": 1,
+      "fee_inclusive_price_records": 1,
       "accessibility_verified": false
     },
     {
@@ -226,51 +226,28 @@
   ],
   "missing": {
     "bounded_prices": [
-      "al-fahidi",
-      "gold-souk",
       "textile-souk",
-      "jbr-beach",
-      "marina-walk",
       "mbr-library",
-      "arabian-tea-house",
       "al-ustad",
-      "al-khayma",
-      "bu-qtair",
-      "al-fanar"
+      "bu-qtair"
     ],
     "published_hours": [
-      "al-fahidi",
-      "gold-souk",
       "textile-souk",
-      "kite-beach",
-      "jbr-beach",
-      "marina-walk",
       "alserkal",
       "mbr-library",
-      "arabian-tea-house",
       "al-ustad",
-      "al-khayma",
       "ravi-satwa",
       "bu-qtair",
-      "al-fanar",
       "alfanar-barsha",
       "etihad-museum"
     ],
     "dated_windows": [
-      "al-fahidi",
-      "gold-souk",
       "textile-souk",
-      "kite-beach",
-      "jbr-beach",
-      "marina-walk",
       "alserkal",
       "mbr-library",
-      "arabian-tea-house",
       "al-ustad",
-      "al-khayma",
       "ravi-satwa",
       "bu-qtair",
-      "al-fanar",
       "alfanar-barsha",
       "etihad-museum",
       "jumeirah-mosque"
@@ -294,7 +271,9 @@
       "stay-dubai-marina",
       "rove-marina",
       "rove-jbr",
-      "rove-la-mer"
+      "rove-la-mer",
+      "rove-marina-quote-flex",
+      "rove-marina-quote-nonrefund"
     ]
   }
 }

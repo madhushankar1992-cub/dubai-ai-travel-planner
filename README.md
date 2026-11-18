@@ -186,7 +186,7 @@ seed without importing or accessing a network. The reviewed snapshot is in
 `evaluation/data-coverage.json`. After rebuilding, run `uv run dubai-data import`
 to activate the new version in the local catalog browser.
 
-Latest selected-source review: **15 November 2026**, dataset `2026-11-15.2`.
+Latest selected-source review: **18 November 2026**, dataset `2026-11-18.1` (12 schedulable places, 156 road-backed routes; see [coverage expansion](docs/data-catalog.md)). Earlier review: **15 November 2026**, dataset `2026-11-15.2`.
 The compact update adds two exact hotel snapshots, OSRM route evidence,
 opt-in dated hours and spending allowances alongside verified entry and room facts. No new dependencies
 or downloaded datasets are required. In the catalog screen, select a price date

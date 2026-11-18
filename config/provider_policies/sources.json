@@ -601,5 +601,187 @@
       "evidence",
       "hours"
     ]
+  },
+  {
+    "id": "osrm-nov18",
+    "owner": "OpenStreetMap contributors / OSRM / FOSSGIS",
+    "url": "https://router.project-osrm.org/table/v1/driving/55.145,25.081;55.301,25.235;55.29,25.269;55.279,25.198;55.309,25.265;55.299,25.264;55.297,25.286;55.209,25.165;55.134,25.078;55.145,25.081;55.3,25.264;55.3,25.264;55.198,25.152;55.31,25.267?annotations=duration,distance&generate_hints=false",
+    "reviewed_on": "2026-11-18",
+    "approved": true,
+    "review_note": "Public OSRM driving table fetched 2026-11-18; code Ok for all 196 cells. Approximate catalog coordinates snapped by 18.895, 46.6, 34.167, 22.85, 3.397, 18.533, 17.511, 23.928, 3.302, 18.895, 54.874, 54.874, 12.53, 1.461 metres. Road connectivity between snapped points supports a taxi estimate, not exact entrances, traffic, dispatch or accessibility. OSM data: https://www.openstreetmap.org/copyright ; ODbL https://opendatacommons.org/licenses/odbl/1-0/ . Static snapshot, no runtime API dependency. Bu Qtair is in the table but unused.",
+    "permitted_use": "Attributed atomic factual snapshot and original estimates; OSM-derived records under ODbL. No page bodies, images or general scraping rights.",
+    "attribution": "OpenStreetMap contributors / OSRM / FOSSGIS",
+    "persistence": true,
+    "export": true,
+    "max_retention_days": null,
+    "allowed_fields": [
+      "evidence",
+      "routes",
+      "prices"
+    ]
+  },
+  {
+    "id": "expanded-assumptions",
+    "owner": "Project planning estimates",
+    "url": "docs/data-catalog.md",
+    "reviewed_on": "2026-11-18",
+    "approved": true,
+    "review_note": "Explicit opt-in planning allowances, not supplier quotes. Restaurant visit without a quote: AED 30-80 per person including a fee reserve. Road timing: ceil(OSRM seconds/60)+10 to twice that value+10. Taxi allowance per traveler: ceil(km*2.5+15) to ceil(km*4+35). Recurring opening hours projected ONLY onto 20-26 November 2026; exceptions require reconfirmation.",
+    "permitted_use": "Attributed atomic factual snapshot and original estimates; OSM-derived records under ODbL. No page bodies, images or general scraping rights.",
+    "attribution": "Project planning estimates",
+    "persistence": true,
+    "export": true,
+    "max_retention_days": null,
+    "allowed_fields": [
+      "evidence",
+      "prices",
+      "hours",
+      "routes",
+      "tariffs"
+    ]
+  },
+  {
+    "id": "alfanar-hours",
+    "owner": "Al Fanar Restaurant",
+    "url": "https://alfanarrestaurant.com/al-seef-dubai",
+    "reviewed_on": "2026-11-18",
+    "approved": true,
+    "review_note": "Official Al Seef branch page (search-indexed text, 18 November 2026): open 12:00-23:00 daily; may change on public holidays and during Ramadan.",
+    "permitted_use": "Attributed atomic factual snapshot and original estimates; OSM-derived records under ODbL. No page bodies, images or general scraping rights.",
+    "attribution": "Al Fanar Restaurant",
+    "persistence": true,
+    "export": true,
+    "max_retention_days": null,
+    "allowed_fields": [
+      "evidence",
+      "hours",
+      "prices"
+    ]
+  },
+  {
+    "id": "thebeach-jbr-hours",
+    "owner": "The Beach JBR",
+    "url": "https://www.thebeach.ae/en/faq",
+    "reviewed_on": "2026-11-18",
+    "approved": true,
+    "review_note": "Official FAQ (search-indexed text, 18 November 2026): retail, services and entertainment Sun-Thu 10:00-23:00, Fri-Sat 10:00-24:00. The public sand is reported open 24 hours by travel sites (unconfirmed); the planning window deliberately follows The Beach's published hours.",
+    "permitted_use": "Attributed atomic factual snapshot and original estimates; OSM-derived records under ODbL. No page bodies, images or general scraping rights.",
+    "attribution": "The Beach JBR",
+    "persistence": true,
+    "export": true,
+    "max_retention_days": null,
+    "allowed_fields": [
+      "evidence",
+      "hours",
+      "prices"
+    ]
+  },
+  {
+    "id": "visitdubai-marina-walk",
+    "owner": "Visit Dubai",
+    "url": "https://visitdubai.com/fi/places-to-visit/marina-walk",
+    "reviewed_on": "2026-11-18",
+    "approved": true,
+    "review_note": "Official Visit Dubai listing (search-indexed text, 18 November 2026): free to visit and open at all hours. Shops and restaurants keep their own hours. The 08:00-22:00 planning window is a conservative choice, not a closing time.",
+    "permitted_use": "Attributed atomic factual snapshot and original estimates; OSM-derived records under ODbL. No page bodies, images or general scraping rights.",
+    "attribution": "Visit Dubai",
+    "persistence": true,
+    "export": true,
+    "max_retention_days": null,
+    "allowed_fields": [
+      "evidence",
+      "hours",
+      "prices"
+    ]
+  },
+  {
+    "id": "fahidi-guides",
+    "owner": "Travel guides (Bayut, Property Finder)",
+    "url": "https://bayut.com/mybayut/guide-to-the-al-fahidi-historical-district",
+    "reviewed_on": "2026-11-18",
+    "approved": true,
+    "review_note": "Travel-guide consensus, 18 November 2026: the neighbourhood has no official visiting hours and can be walked at any time; one summary cited a Dubai Culture listing of 00:00-23:59. Museums and cafes inside keep their own hours (Dubai Museum status uncertain). The 09:00-19:00 planning window is conservative. Not confirmed directly with Dubai Culture.",
+    "permitted_use": "Attributed atomic factual snapshot and original estimates; OSM-derived records under ODbL. No page bodies, images or general scraping rights.",
+    "attribution": "Travel guides (Bayut, Property Finder)",
+    "persistence": true,
+    "export": true,
+    "max_retention_days": null,
+    "allowed_fields": [
+      "evidence",
+      "hours",
+      "prices"
+    ]
+  },
+  {
+    "id": "gold-souk-guides",
+    "owner": "Travel guides (Property Finder, Bayut)",
+    "url": "https://www.propertyfinder.ae/blog/gold-souk-dubai/",
+    "reviewed_on": "2026-11-18",
+    "approved": true,
+    "review_note": "Third-party listings, 18 November 2026, disagree (09:00-21:00, 09:30-21:30, 10:00-22:00). Most give Sat-Thu from morning and Friday from about 16:00. Conservative overlap used: Sat-Thu 10:00-21:30, Fri 16:00-21:30. Individual shops differ; some close mid-afternoon.",
+    "permitted_use": "Attributed atomic factual snapshot and original estimates; OSM-derived records under ODbL. No page bodies, images or general scraping rights.",
+    "attribution": "Travel guides (Property Finder, Bayut)",
+    "persistence": true,
+    "export": true,
+    "max_retention_days": null,
+    "allowed_fields": [
+      "evidence",
+      "hours",
+      "prices"
+    ]
+  },
+  {
+    "id": "tea-house-listings",
+    "owner": "Restaurant listings (What's On and others)",
+    "url": "https://whatson.ae/2023/09/local-legend-review-of-arabian-tea-house/",
+    "reviewed_on": "2026-11-18",
+    "approved": true,
+    "review_note": "Third-party listings, 18 November 2026: most give 07:00-23:00 daily, others 07:30 and some weekdays to 22:00. Conservative overlap used: 07:30-22:00 daily. Official site not confirmed.",
+    "permitted_use": "Attributed atomic factual snapshot and original estimates; OSM-derived records under ODbL. No page bodies, images or general scraping rights.",
+    "attribution": "Restaurant listings (What's On and others)",
+    "persistence": true,
+    "export": true,
+    "max_retention_days": null,
+    "allowed_fields": [
+      "evidence",
+      "hours",
+      "prices"
+    ]
+  },
+  {
+    "id": "khayma-listings",
+    "owner": "Restaurant listings (Visit Dubai food guide and others)",
+    "url": "https://visitdubai.com/en/articles/emirati-food-in-dubai",
+    "reviewed_on": "2026-11-18",
+    "approved": true,
+    "review_note": "Listings, 18 November 2026, disagree (08:00-23:00 versus 09:00-22:00). Conservative overlap used: 09:00-22:00 daily. Restaurant's own site not confirmed.",
+    "permitted_use": "Attributed atomic factual snapshot and original estimates; OSM-derived records under ODbL. No page bodies, images or general scraping rights.",
+    "attribution": "Restaurant listings (Visit Dubai food guide and others)",
+    "persistence": true,
+    "export": true,
+    "max_retention_days": null,
+    "allowed_fields": [
+      "evidence",
+      "hours",
+      "prices"
+    ]
+  },
+  {
+    "id": "kite-beach-faq",
+    "owner": "Kite Beach rental and operator FAQ",
+    "url": "https://kite-beach-rentals.squarespace.com/kite-beach-faq",
+    "reviewed_on": "2026-11-18",
+    "approved": true,
+    "review_note": "FAQ and travel guides, 18 November 2026: the beach is open 24 hours while restaurants, toilets, showers and the beach club close overnight; facility hours are commonly 10:00-22:00. The planning window uses the facility hours. Operator hours not confirmed directly.",
+    "permitted_use": "Attributed atomic factual snapshot and original estimates; OSM-derived records under ODbL. No page bodies, images or general scraping rights.",
+    "attribution": "Kite Beach rental and operator FAQ",
+    "persistence": true,
+    "export": true,
+    "max_retention_days": null,
+    "allowed_fields": [
+      "evidence",
+      "hours",
+      "prices"
+    ]
   }
 ]
