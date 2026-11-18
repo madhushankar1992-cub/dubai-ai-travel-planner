@@ -314,10 +314,10 @@ def extract_request(text, gateway):
         raise ValueError("Request text must contain 1–10000 bytes")
 
     def validate(output):
+        # The missing-input list is computed by Python from the proposed request, so the
+        # computed value replaces the model's wording instead of failing the whole run.
         expected = output.request.clarification_fields() if output.request else ["days"]
-        if output.clarification_fields != expected:
-            raise ValueError("Missing-input fields do not match proposed request")
-        return output
+        return output.model_copy(update={"clarification_fields": expected})
 
     return gateway.generate(
         "orchestrator", PROMPTS["extract"], {"user_text": text}, ExtractedRequest, validate=validate

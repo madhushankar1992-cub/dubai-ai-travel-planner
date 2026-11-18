@@ -51,6 +51,8 @@ def _session_registry():
 def _request_form(catalog):
     stays = {stay.id: stay for stay in catalog.accommodation}
     places = {place.id: place for place in catalog.places if place.category != "area"}
+    # These four have reviewed hours and routes in the curated dataset, so the scheduler
+    # can place them. Places without that evidence are left for the user to opt into.
     default_places = [
         key for key in ("al-seef", "dubai-frame", "shindagha", "dubai-mall") if key in places
     ]

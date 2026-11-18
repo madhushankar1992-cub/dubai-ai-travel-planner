@@ -325,3 +325,26 @@ def test_groq_malformed_json_400_is_retried_but_other_400s_are_not(monkeypatch):
     with pytest.raises(ModelFailure) as caught:
         post_json(url, {}, {}, 1)
     assert caught.value.code == "invalid_provider_request" and other.calls == 1
+
+
+@pytest.mark.parametrize(
+    "role",
+    ["orchestrator", "destination", "logistics", "planner", "scheduler", "budget", "reviewer"],
+)
+def test_every_agent_uses_groq_except_review_which_uses_gemini(role):
+    urls = []
+    review = json.dumps({"observations": [], "summary": "Review complete."})
+
+    def transport(url, headers, payload, timeout):
+        urls.append(url)
+        if "generativelanguage" in url:
+            return {
+                "candidates": [{"finishReason": "STOP", "content": {"parts": [{"text": review}]}}],
+                "usageMetadata": {"totalTokenCount": 50},
+            }
+        return response(GOOD)
+
+    schema = ReviewAdvice if role == "reviewer" else Selection
+    gateway(transport).generate(role, "Return JSON", {}, schema)
+    expected = "generativelanguage" if role == "reviewer" else "api.groq.com"
+    assert len(urls) == 1 and expected in urls[0]
