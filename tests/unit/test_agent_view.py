@@ -38,3 +38,11 @@ def test_graph_dot_colours_nodes_and_shows_the_loop():
 def test_every_agent_has_a_graph_task_and_summary_role():
     assert [label for label, _, _ in AGENTS][-1] == "Review"
     assert len({task for _, task, _ in AGENTS}) == 7
+
+
+def test_failure_reasons_get_plain_language_help():
+    from dubai_planner.ui.agent_view import failure_help
+
+    assert "usage limit" in failure_help("quota_exhausted")
+    assert "API key" in failure_help("authentication")
+    assert "try again" in failure_help("something_new").lower()

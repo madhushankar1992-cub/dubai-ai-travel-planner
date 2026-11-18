@@ -16,6 +16,22 @@ AGENTS = (
     ("Budget", "costing", "budget"),
     ("Review", "review", "reviewer"),
 )
+FAILURE_HELP = {
+    "quota_exhausted": (
+        "The AI provider's usage limit was reached. Groq's free tier has per-minute and "
+        "per-day token limits; the daily allowance refills gradually. Wait a few minutes and "
+        "try again, or use another Groq model or plan."
+    ),
+    "network_or_timeout": "The AI provider took too long or could not be reached. Please try again.",
+    "invalid_model_output": "A model's answer failed validation twice. Please try again.",
+    "deadline": "The run took longer than its time limit. Try again, or raise RUN_TIMEOUT_SECONDS.",
+    "authentication": "A provider rejected the API key. Check the keys in your private settings.",
+    "access_denied": "A provider denied access. Check the key's permissions in your provider console.",
+    "model_unavailable": "The selected model is not available on this account. Choose another GROQ_MODEL.",
+    "model_access_denied": "This account is not allowed to use the selected model.",
+    "provider_server_error": "The provider reported a temporary server problem (such as high demand). Try again shortly.",
+    "cancelled": "This run was cancelled.",
+}
 LIGHTS = {"done": "🟢", "running": "🟡", "waiting": "⚪", "stopped": "🔴"}
 NODE_STYLE = {
     "done": ("#c9f2d4", "#2e9e5b"),
@@ -282,3 +298,10 @@ def show_timeline_and_map(result, catalog):
             "Pins use approximate catalog coordinates, not exact entrances. Map tiles are "
             "supplied by Streamlit's default map provider (OpenStreetMap contributors)."
         )
+
+
+def failure_help(reason):
+    """Plain-language next step for a failed run, from its safe stop reason."""
+    return FAILURE_HELP.get(
+        reason, "The run stopped before finishing. Please try again; the timeline shows where."
+    )

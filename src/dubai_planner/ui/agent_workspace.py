@@ -15,7 +15,7 @@ from dubai_planner.services.run_service import (
     run_model,
 )
 from dubai_planner.storage.plans import PlanRepository
-from dubai_planner.ui.agent_view import agent_cards, agent_graph
+from dubai_planner.ui.agent_view import agent_cards, agent_graph, failure_help
 from dubai_planner.ui.workspace import show_plan
 
 ROLE_TASKS = (
@@ -255,6 +255,8 @@ def _show_run(snapshot, store, registry, catalog):
         st.info("Planning continues in the session worker. Refresh to collect new safe events.")
         return
     result = snapshot.result
+    if result.status == "failed":
+        st.warning(failure_help(result.metrics.get("stop_reason", "")))
     provider_calls = {
         "Groq": result.metrics.get("calls_provider_groq", 0),
         "Gemini": result.metrics.get("calls_provider_gemini", 0),
