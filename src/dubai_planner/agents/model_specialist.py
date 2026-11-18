@@ -243,26 +243,28 @@ class ModelSpecialist:
         if self.role == "scheduler":
             data["candidates"] = [compact(p) for p in context.candidates]
             selected = {p.id for p in context.candidates} | {context.base_id}
+            # Compact rows (columns listed once) and only road-supported routes: a verbose list
+            # for a dozen stops made this request 3x larger and hit provider token limits.
+            data["route_columns"] = ["origin", "destination", "mode", "minutes_max"]
             data["routes"] = [
-                {
-                    "origin": r.origin_id,
-                    "destination": r.destination_id,
-                    "mode": r.mode,
-                    "minutes_max": r.duration_max,
-                    "supported": r.feasibility_supported,
-                }
+                [r.origin_id, r.destination_id, r.mode, r.duration_max]
                 for r in catalog.routes
-                if r.origin_id in selected and r.destination_id in selected
+                if r.feasibility_supported
+                and r.origin_id in selected
+                and r.destination_id in selected
             ]
 
             def validate(output):
-                approved(output.selected_ids, context.candidates)
-                if set(output.selected_ids) != {p.id for p in context.candidates}:
-                    raise ValueError("Ordering must preserve selected candidates")
+                # Python owns the candidate set and builds the real schedule, so the model's
+                # order is used where valid; duplicates and unknown IDs are dropped and any
+                # stop it forgot is appended, rather than failing the whole run.
                 return output
 
             output = ask(Selection, validate)
-            ordered = approved(output.selected_ids, context.candidates)
+            by_id = {p.id: p for p in context.candidates}
+            ordered_ids = [i for i in dict.fromkeys(output.selected_ids) if i in by_id]
+            ordered_ids += [p.id for p in context.candidates if p.id not in ordered_ids]
+            ordered = [by_id[i] for i in ordered_ids]
             return LogisticsOutput(
                 accommodation=context.accommodation,
                 days=build_schedule(

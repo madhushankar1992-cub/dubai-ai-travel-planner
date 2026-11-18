@@ -213,3 +213,23 @@ def test_last_resort_guard_tops_up_and_discloses_it(catalog, registry, now):
     assert guard and guard[0].startswith("destination/")
     assert result.status != "failed"
     assert result.metrics["model_calls"] == 7  # no repair spent on a short answer
+
+
+class ScramblingScheduler(MockProviders):
+    """Scheduler that drops a stop, repeats one and invents an ID."""
+
+    def __call__(self, url, headers, payload, timeout):
+        response = super().__call__(url, headers, payload, timeout)
+        if self.calls[-1][0] == "schedule":
+            body = json.loads(response["choices"][0]["message"]["content"])
+            body["selected_ids"] = [body["selected_ids"][0]] * 2 + ["not-a-real-place"]
+            response["choices"][0]["message"]["content"] = json.dumps(body)
+        return response
+
+
+def test_scheduler_order_is_repaired_by_python_not_a_failed_run(catalog, registry, now):
+    result = execute(catalog, registry, now, ScramblingScheduler())
+    assert result.status != "failed", result.metrics
+    assert result.metrics["model_calls"] == 7  # no repair attempt wasted on the ordering
+    scheduled = [a.place_id for day in result.days for a in day.activities]
+    assert len(scheduled) == len(set(scheduled)) >= 1
